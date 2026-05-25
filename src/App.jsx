@@ -7,6 +7,7 @@ import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
 import SearchModal from './components/ui/SearchModal'
 import Dashboard from './pages/Dashboard'
+import CategoryPage from './pages/CategoryPage'
 import ToolPage from './pages/ToolPage'
 import Favorites from './pages/Favorites'
 import About from './pages/About'
@@ -50,6 +51,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/about" element={<About />} />
+              <Route path="/:category" element={<CategoryPage />} />
               <Route path="/:category/:toolId" element={<ToolPage />} />
             </Routes>
           </main>
