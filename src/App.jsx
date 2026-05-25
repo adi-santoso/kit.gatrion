@@ -37,7 +37,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex h-screen bg-slate-950 text-slate-100">
+      <div className="flex h-screen bg-slate-950 dark:bg-slate-950 bg-slate-50 text-slate-900 dark:text-slate-100">
         <Sidebar />
         <motion.div 
           className="flex-1 ml-64 flex flex-col overflow-hidden"

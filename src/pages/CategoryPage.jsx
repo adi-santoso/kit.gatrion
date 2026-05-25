@@ -19,50 +19,42 @@ export default function CategoryPage() {
   const CategoryIcon = Icons[categoryData.icon]
 
   return (
-    <div className="p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="p-3 bg-blue-500/10 rounded-lg">
-            <CategoryIcon className="text-blue-400" size={24} />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-100">{categoryData.label}</h1>
-            <p className="text-slate-400 text-sm">{categoryTools.length} tools available</p>
-          </div>
+    <motion.div 
+      className="p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="p-3 bg-blue-500/10 rounded-lg">
+          <CategoryIcon className="text-blue-400" size={24} />
         </div>
-
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {categoryTools.map((tool) => {
-            const ToolIcon = Icons[tool.icon]
-            return (
-              <motion.div
-                key={tool.id}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link
-                  to={tool.path}
-                  className="block p-4 bg-gray-800/50 border border-white/[0.06] rounded-lg hover:border-blue-500/50 transition-all group"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className={`p-2 ${tool.iconBg} rounded-lg`}>
-                      <ToolIcon className={tool.iconColor} size={20} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-slate-100 group-hover:text-blue-400 transition-colors">
-                        {tool.name}
-                      </h3>
-                      <p className="text-sm text-slate-400 mt-1">{tool.description}</p>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            )
-          })}
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">{categoryData.label}</h1>
+          <p className="text-slate-600 dark:text-slate-400 text-sm">{categoryTools.length} tools available</p>
         </div>
       </div>
-    </div>
+
+      {/* Tools Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {categoryTools.map((tool) => {
+          const ToolIcon = Icons[tool.icon]
+          return (
+            <Link
+              key={tool.id}
+              to={tool.path}
+              className="group bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-xl p-4 hover:border-slate-300 dark:hover:border-white/20 hover:scale-[1.02] transition-all duration-200"
+            >
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${tool.iconBg}`}>
+                <ToolIcon className={tool.iconColor} size={20} />
+              </div>
+              <p className="font-medium text-sm text-slate-900 dark:text-slate-100 mb-1">{tool.name}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">{tool.description}</p>
+            </Link>
+          )
+        })}
+      </div>
+    </motion.div>
   )
 }

@@ -5,6 +5,23 @@ All notable changes to DevToolkit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Category page to display all tools within a category
+- Smooth page transitions with Framer Motion (fade-in + slide-up animation)
+- Full light mode support with dual theme system
+
+### Fixed
+- Sidebar category links not working (added `/:category` route)
+- Inconsistent card layouts across pages (unified to 4-column grid)
+- Theme toggle not functional (implemented complete light/dark mode styles)
+
+### Changed
+- Unified card design across Dashboard, Category, and Favorites pages
+- Updated all components with light/dark mode color variants
+- Improved visual consistency with standardized spacing and borders
+
 ## [0.1.0] - 2026-05-25
 
 ### Added

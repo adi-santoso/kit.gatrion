@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
+import { motion } from 'framer-motion'
 import { tools } from '../data/tools'
 
 const toolComponents = {
@@ -67,7 +68,13 @@ export default function ToolPage() {
         <div className="text-slate-400">Loading...</div>
       </div>
     }>
-      <ToolComponent />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <ToolComponent />
+      </motion.div>
     </Suspense>
   )
 }
