@@ -59,25 +59,25 @@ export default function JsonToCsv() {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             JSON Input (Array of Objects)
           </label>
           <textarea
             value={json}
             onChange={(e) => setJson(e.target.value)}
             placeholder='[{"name":"John","age":30},{"name":"Jane","age":25}]'
-            className="w-full h-96 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+            className="w-full h-96 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             CSV Output
           </label>
           <textarea
             value={csv}
             readOnly
             placeholder="CSV will appear here..."
-            className="w-full h-96 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm resize-none"
+            className="w-full h-96 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 resize-none"
           />
         </div>
       </div>

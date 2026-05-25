@@ -64,7 +64,7 @@ export default function GradientGenerator() {
         <div className="space-y-4">
           {/* Type */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Gradient Type
             </label>
             <div className="flex gap-2">
@@ -86,7 +86,7 @@ export default function GradientGenerator() {
           {/* Angle (Linear only) */}
           {type === 'linear' && (
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Direction: {angle}°
               </label>
               <input
@@ -102,7 +102,7 @@ export default function GradientGenerator() {
 
           {/* Color Stops */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Color Stops
             </label>
             <div className="space-y-2">
@@ -112,13 +112,13 @@ export default function GradientGenerator() {
                     type="color"
                     value={c.color}
                     onChange={(e) => updateColor(i, 'color', e.target.value)}
-                    className="w-12 h-10 rounded border border-white/[0.06] cursor-pointer"
+                    className="w-12 h-10 rounded border border-slate-200 dark:border-white/[0.06] cursor-pointer"
                   />
                   <input
                     type="text"
                     value={c.color}
                     onChange={(e) => updateColor(i, 'color', e.target.value)}
-                    className="flex-1 bg-gray-900 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-slate-100 font-mono"
+                    className="flex-1 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-slate-100 font-mono focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
                   />
                   <input
                     type="number"
@@ -126,9 +126,9 @@ export default function GradientGenerator() {
                     max="100"
                     value={c.position}
                     onChange={(e) => updateColor(i, 'position', parseInt(e.target.value))}
-                    className="w-16 bg-gray-900 border border-white/[0.06] rounded-lg px-2 py-2 text-sm text-slate-100"
+                    className="w-16 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-2 py-2 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
                   />
-                  <span className="text-slate-400 text-sm">%</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-sm">%</span>
                   {colors.length > 2 && (
                     <button
                       onClick={() => removeColor(i)}
@@ -148,10 +148,10 @@ export default function GradientGenerator() {
           {/* CSS Output */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-slate-300">CSS Output</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">CSS Output</label>
               <CopyButton text={generateCSS()} />
             </div>
-            <pre className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-sm text-slate-300 font-mono overflow-x-auto">
+            <pre className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-sm text-slate-700 dark:text-slate-300 font-mono overflow-x-auto">
               {generateCSS()}
             </pre>
           </div>
@@ -159,11 +159,11 @@ export default function GradientGenerator() {
 
         {/* Preview */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Preview
           </label>
           <div
-            className="w-full h-64 rounded-xl border border-white/[0.06]"
+            className="w-full h-64 rounded-xl border border-slate-200 dark:border-white/[0.06]"
             style={{ background: generateCSS().replace('background: ', '').replace(';', '') }}
           />
         </div>

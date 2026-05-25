@@ -46,7 +46,7 @@ export default function PasswordGenerator() {
     >
       {/* Length */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Length: {length}
         </label>
         <input
@@ -62,7 +62,7 @@ export default function PasswordGenerator() {
       {/* Options */}
       <div className="mb-6 space-y-2">
         {Object.keys(options).map(key => (
-          <label key={key} className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+          <label key={key} className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer">
             <input
               type="checkbox"
               checked={options[key]}
@@ -83,10 +83,10 @@ export default function PasswordGenerator() {
       {password && (
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-sm font-medium text-slate-300">Generated Password</label>
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Generated Password</label>
             <CopyButton text={password} />
           </div>
-          <div className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-lg text-slate-100 font-mono break-all">
+          <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-lg text-slate-900 dark:text-slate-100 font-mono break-all">
             {password}
           </div>
         </div>

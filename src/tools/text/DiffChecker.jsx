@@ -41,23 +41,23 @@ export default function DiffChecker() {
       {/* Inputs */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Text A
           </label>
           <textarea
             value={textA}
             onChange={(e) => setTextA(e.target.value)}
-            className="w-full h-64 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+            className="w-full h-64 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Text B
           </label>
           <textarea
             value={textB}
             onChange={(e) => setTextB(e.target.value)}
-            className="w-full h-64 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+            className="w-full h-64 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function DiffChecker() {
       {showDiff && (
         <div>
           <div className="flex items-center gap-4 mb-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
               Diff Result
             </label>
             <div className="flex items-center gap-3 text-xs">
@@ -80,13 +80,13 @@ export default function DiffChecker() {
               </span>
             </div>
           </div>
-          <div className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 font-mono text-sm overflow-x-auto">
+          <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 font-mono text-sm overflow-x-auto">
             {diff.map((part, index) => {
               const bgColor = part.added
-                ? 'bg-green-500/20 text-green-300'
+                ? 'bg-green-500/20 text-green-600 dark:text-green-300'
                 : part.removed
-                ? 'bg-red-500/20 text-red-300'
-                : 'text-slate-300'
+                ? 'bg-red-500/20 text-red-600 dark:text-red-300'
+                : 'text-slate-700 dark:text-slate-300'
               return (
                 <div key={index} className={`${bgColor} whitespace-pre`}>
                   {part.value}

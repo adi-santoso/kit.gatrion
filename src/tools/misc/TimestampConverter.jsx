@@ -76,7 +76,7 @@ export default function TimestampConverter() {
 
       {/* Unix Timestamp */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Unix Timestamp (seconds)
         </label>
         <input
@@ -84,13 +84,13 @@ export default function TimestampConverter() {
           value={timestamp}
           onChange={(e) => setTimestamp(e.target.value)}
           placeholder="1234567890"
-          className="w-full bg-gray-900 border border-white/[0.06] rounded-lg px-4 py-3 text-slate-100 font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500/50"
+          className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
         />
       </div>
 
       {/* Human Readable */}
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Human Readable (ISO 8601)
         </label>
         <input
@@ -98,7 +98,7 @@ export default function TimestampConverter() {
           value={datetime}
           onChange={(e) => setDatetime(e.target.value)}
           placeholder="2023-01-01T00:00:00.000Z"
-          className="w-full bg-gray-900 border border-white/[0.06] rounded-lg px-4 py-3 text-slate-100 font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500/50"
+          className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
         />
       </div>
     </ToolLayout>

@@ -68,7 +68,7 @@ export default function JsonPrettier() {
       {/* Editors */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Input JSON
           </label>
           <CodeEditor
@@ -78,7 +78,7 @@ export default function JsonPrettier() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Formatted JSON
           </label>
           <CodeEditor

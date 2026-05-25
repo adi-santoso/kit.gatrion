@@ -20,23 +20,23 @@ export default function MarkdownPreview() {
       <div className="grid grid-cols-2 gap-4">
         {/* Editor */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Markdown Input
           </label>
           <textarea
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
-            className="w-full h-[600px] bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+            className="w-full h-[600px] bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
           />
         </div>
 
         {/* Preview */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             HTML Preview
           </label>
           <div
-            className="w-full h-[600px] bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 text-sm overflow-y-auto prose prose-invert prose-sm max-w-none"
+            className="w-full h-[600px] bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 text-sm overflow-y-auto prose dark:prose-invert prose-sm max-w-none"
             dangerouslySetInnerHTML={{ __html: getHTML() }}
             style={{
               lineHeight: '1.6',

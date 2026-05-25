@@ -32,7 +32,7 @@ export default function UuidGenerator() {
     >
       {/* Controls */}
       <div className="flex items-center gap-3 mb-6">
-        <label className="text-sm font-medium text-slate-300">
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
           Count:
         </label>
         <input
@@ -41,7 +41,7 @@ export default function UuidGenerator() {
           max="100"
           value={count}
           onChange={(e) => setCount(Math.max(1, Math.min(100, parseInt(e.target.value) || 1)))}
-          className="w-24 bg-gray-900 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500/50"
+          className="w-24 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
         />
         <Button variant="primary" onClick={handleGenerate}>
           Generate
@@ -59,10 +59,10 @@ export default function UuidGenerator() {
           {uuids.map((uuid, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 bg-gray-900 border border-white/[0.06] rounded-lg p-4"
+              className="flex items-center gap-3 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4"
             >
-              <span className="text-sm text-slate-500 w-8">#{index + 1}</span>
-              <div className="flex-1 font-mono text-sm text-slate-300">
+              <span className="text-sm text-slate-500 dark:text-slate-500 w-8">#{index + 1}</span>
+              <div className="flex-1 font-mono text-sm text-slate-700 dark:text-slate-300">
                 {uuid}
               </div>
               <CopyButton text={uuid} />

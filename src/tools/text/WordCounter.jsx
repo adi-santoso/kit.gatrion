@@ -21,23 +21,23 @@ export default function WordCounter() {
     >
       {/* Input */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Text Input
         </label>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Type or paste your text here..."
-          className="w-full h-64 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+          className="w-full h-64 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
         />
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {Object.entries(stats).map(([key, value]) => (
-          <div key={key} className="bg-gray-900 border border-white/[0.06] rounded-lg p-4">
-            <div className="text-3xl font-bold text-blue-400 mb-1">{value.toLocaleString()}</div>
-            <div className="text-sm text-slate-400 capitalize">
+          <div key={key} className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4">
+            <div className="text-3xl font-bold text-blue-500 dark:text-blue-400 mb-1">{value.toLocaleString()}</div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 capitalize">
               {key.replace(/([A-Z])/g, ' $1').trim()}
             </div>
           </div>

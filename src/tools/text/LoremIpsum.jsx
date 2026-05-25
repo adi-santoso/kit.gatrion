@@ -47,7 +47,7 @@ export default function LoremIpsum() {
     >
       <div className="mb-6 space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Type
           </label>
           <div className="flex gap-2">
@@ -73,7 +73,7 @@ export default function LoremIpsum() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Count: {count}
           </label>
           <input
@@ -96,13 +96,13 @@ export default function LoremIpsum() {
 
       {output && (
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Generated Text
           </label>
           <textarea
             value={output}
             readOnly
-            className="w-full h-96 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 text-sm resize-none"
+            className="w-full h-96 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 text-sm resize-none"
           />
         </div>
       )}

@@ -54,14 +54,14 @@ export default function JwtDecoder() {
     >
       {/* Input */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           JWT Token
         </label>
         <textarea
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder="Paste JWT token here..."
-          className="w-full h-24 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500/50 resize-none"
+          className="w-full h-24 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
         />
       </div>
 
@@ -88,10 +88,10 @@ export default function JwtDecoder() {
           {/* Header */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-slate-300">Header</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Header</label>
               <CopyButton text={JSON.stringify(header, null, 2)} />
             </div>
-            <pre className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-sm text-slate-300 font-mono overflow-x-auto">
+            <pre className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-sm text-slate-700 dark:text-slate-300 font-mono overflow-x-auto">
               {JSON.stringify(header, null, 2)}
             </pre>
           </div>
@@ -99,10 +99,10 @@ export default function JwtDecoder() {
           {/* Payload */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-slate-300">Payload</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Payload</label>
               <CopyButton text={JSON.stringify(payload, null, 2)} />
             </div>
-            <pre className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-sm text-slate-300 font-mono overflow-x-auto">
+            <pre className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-sm text-slate-700 dark:text-slate-300 font-mono overflow-x-auto">
               {JSON.stringify(payload, null, 2)}
             </pre>
           </div>
@@ -110,10 +110,10 @@ export default function JwtDecoder() {
           {/* Signature */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-slate-300">Signature</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Signature</label>
               <CopyButton text={signature} />
             </div>
-            <div className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-sm text-slate-400 font-mono break-all">
+            <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-sm text-slate-600 dark:text-slate-400 font-mono break-all">
               {signature}
             </div>
           </div>

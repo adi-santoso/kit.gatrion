@@ -34,14 +34,14 @@ export default function HashGenerator() {
     >
       {/* Input */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Input Text
         </label>
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter text to hash..."
-          className="w-full h-32 bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-slate-100 font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500/50 resize-none"
+          className="w-full h-32 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
         />
       </div>
 
@@ -50,12 +50,12 @@ export default function HashGenerator() {
         {Object.entries(hashes).map(([algo, hash]) => (
           <div
             key={algo}
-            className="flex items-center gap-3 bg-gray-900 border border-white/[0.06] rounded-lg p-4"
+            className="flex items-center gap-3 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4"
           >
-            <span className="text-sm font-semibold text-slate-300 uppercase w-20">
+            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase w-20">
               {algo}
             </span>
-            <div className="flex-1 font-mono text-sm text-slate-400 break-all">
+            <div className="flex-1 font-mono text-sm text-slate-600 dark:text-slate-400 break-all">
               {hash || '—'}
             </div>
             {hash && <CopyButton text={hash} />}

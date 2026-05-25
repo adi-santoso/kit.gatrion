@@ -40,7 +40,7 @@ export default function BorderRadius() {
         <div className="space-y-4">
           {/* All Corners */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               All Corners
             </label>
             <input
@@ -54,7 +54,7 @@ export default function BorderRadius() {
 
           {/* Individual Corners */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Top Left: {radius.topLeft}px
             </label>
             <input
@@ -68,7 +68,7 @@ export default function BorderRadius() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Top Right: {radius.topRight}px
             </label>
             <input
@@ -82,7 +82,7 @@ export default function BorderRadius() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Bottom Right: {radius.bottomRight}px
             </label>
             <input
@@ -96,7 +96,7 @@ export default function BorderRadius() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Bottom Left: {radius.bottomLeft}px
             </label>
             <input
@@ -112,10 +112,10 @@ export default function BorderRadius() {
           {/* CSS Output */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-slate-300">CSS Output</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">CSS Output</label>
               <CopyButton text={generateCSS()} />
             </div>
-            <pre className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-sm text-slate-300 font-mono overflow-x-auto">
+            <pre className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-sm text-slate-700 dark:text-slate-300 font-mono overflow-x-auto">
               {generateCSS()}
             </pre>
           </div>
@@ -123,7 +123,7 @@ export default function BorderRadius() {
 
         {/* Preview */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Preview
           </label>
           <div className="w-full h-64 bg-gray-800 rounded-xl flex items-center justify-center">

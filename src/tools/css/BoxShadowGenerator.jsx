@@ -37,7 +37,7 @@ export default function BoxShadowGenerator() {
         <div className="space-y-4">
           {/* X Offset */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Horizontal Offset: {shadow.x}px
             </label>
             <input
@@ -52,7 +52,7 @@ export default function BoxShadowGenerator() {
 
           {/* Y Offset */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Vertical Offset: {shadow.y}px
             </label>
             <input
@@ -67,7 +67,7 @@ export default function BoxShadowGenerator() {
 
           {/* Blur */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Blur Radius: {shadow.blur}px
             </label>
             <input
@@ -82,7 +82,7 @@ export default function BoxShadowGenerator() {
 
           {/* Spread */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Spread Radius: {shadow.spread}px
             </label>
             <input
@@ -98,18 +98,18 @@ export default function BoxShadowGenerator() {
           {/* Color & Opacity */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Color
               </label>
               <input
                 type="color"
                 value={shadow.color}
                 onChange={(e) => updateShadow('color', e.target.value)}
-                className="w-full h-10 rounded border border-white/[0.06] cursor-pointer"
+                className="w-full h-10 rounded border border-slate-200 dark:border-white/[0.06] cursor-pointer"
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Opacity: {shadow.opacity}%
               </label>
               <input
@@ -124,7 +124,7 @@ export default function BoxShadowGenerator() {
           </div>
 
           {/* Inset */}
-          <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer">
             <input
               type="checkbox"
               checked={shadow.inset}
@@ -137,10 +137,10 @@ export default function BoxShadowGenerator() {
           {/* CSS Output */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-slate-300">CSS Output</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">CSS Output</label>
               <CopyButton text={generateCSS()} />
             </div>
-            <pre className="bg-gray-900 border border-white/[0.06] rounded-lg p-4 text-sm text-slate-300 font-mono overflow-x-auto">
+            <pre className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-sm text-slate-700 dark:text-slate-300 font-mono overflow-x-auto">
               {generateCSS()}
             </pre>
           </div>
@@ -148,7 +148,7 @@ export default function BoxShadowGenerator() {
 
         {/* Preview */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Preview
           </label>
           <div className="w-full h-64 bg-gray-800 rounded-xl flex items-center justify-center">
