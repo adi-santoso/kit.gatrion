@@ -7,6 +7,7 @@ import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
 import SearchModal from './components/ui/SearchModal'
 import Dashboard from './pages/Dashboard'
+import AllTools from './pages/AllTools'
 import CategoryPage from './pages/CategoryPage'
 import ToolPage from './pages/ToolPage'
 import Favorites from './pages/Favorites'
@@ -49,6 +50,7 @@ function App() {
           <main className="flex-1 overflow-y-auto">
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/all" element={<AllTools />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/about" element={<About />} />
               <Route path="/:category" element={<CategoryPage />} />
