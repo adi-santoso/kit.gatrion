@@ -1,0 +1,109 @@
+import { Link, useLocation } from 'react-router-dom'
+import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info } from 'lucide-react'
+import { categories } from '../../data/tools'
+
+export default function Sidebar() {
+  const location = useLocation()
+
+  const isActive = (path) => location.pathname === path
+
+  return (
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-gray-900 border-r border-white/[0.06] flex flex-col">
+      {/* Logo */}
+      <div className="h-14 flex items-center px-4 border-b border-white/[0.06]">
+        <div className="flex items-center gap-2">
+          <div className="text-blue-400 font-mono text-xl">&lt;/&gt;</div>
+          <span className="font-semibold text-slate-100">DevToolkit</span>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto py-4">
+        {/* Dashboard */}
+        <Link
+          to="/"
+          className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-lg transition-colors ${
+            isActive('/')
+              ? 'bg-blue-500/10 border-l-2 border-blue-500 text-blue-400'
+              : 'text-slate-400 hover:bg-white/5 hover:text-slate-300'
+          }`}
+        >
+          <Home size={16} />
+          <span className="text-sm font-medium">Dashboard</span>
+        </Link>
+
+        {/* Categories */}
+        <div className="mt-6 px-4">
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            Kategori
+          </p>
+        </div>
+
+        {categories.map((cat) => {
+          const Icon = {
+            Braces,
+            Type,
+            Lock,
+            Palette,
+            Code2,
+            Wrench,
+          }[cat.icon]
+
+          return (
+            <Link
+              key={cat.id}
+              to={`/${cat.id}`}
+              className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-lg transition-colors ${
+                location.pathname.startsWith(`/${cat.id}`)
+                  ? 'bg-blue-500/10 border-l-2 border-blue-500 text-blue-400'
+                  : 'text-slate-400 hover:bg-white/5 hover:text-slate-300'
+              }`}
+            >
+              <Icon size={16} />
+              <span className="text-sm font-medium">{cat.label}</span>
+            </Link>
+          )
+        })}
+
+        {/* Favorites & About */}
+        <div className="mt-6 border-t border-white/[0.06] pt-4">
+          <Link
+            to="/favorites"
+            className="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-slate-400 hover:bg-white/5 hover:text-slate-300 transition-colors"
+          >
+            <Star size={16} />
+            <span className="text-sm font-medium">Favorites</span>
+          </Link>
+          <Link
+            to="/about"
+            className="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-slate-400 hover:bg-white/5 hover:text-slate-300 transition-colors"
+          >
+            <Info size={16} />
+            <span className="text-sm font-medium">About</span>
+          </Link>
+        </div>
+      </nav>
+
+      {/* App Info Card */}
+      <div className="p-4 border-t border-white/[0.06]">
+        <div className="bg-gray-800/50 rounded-lg p-3 text-xs text-slate-400 space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="font-semibold text-slate-300">DevToolkit v0.1.0</span>
+            <span>🛡️</span>
+          </div>
+          <p>100% Client-side</p>
+          <p>No data leaves your browser</p>
+          <a
+            href="https://gatrion.my.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors mt-2"
+          >
+            <span>←</span>
+            <span>gatrion.my.id</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+  )
+}

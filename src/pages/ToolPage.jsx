@@ -1,0 +1,73 @@
+import { useParams } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { tools } from '../data/tools'
+
+const toolComponents = {
+  'json-prettier': lazy(() => import('../tools/json/JsonPrettier')),
+  'json-compare': lazy(() => import('../tools/json/JsonCompare')),
+  'json-to-csv': lazy(() => import('../tools/json/JsonToCsv')),
+  'json-to-yaml': lazy(() => import('../tools/json/JsonToYaml')),
+  'json-validator': lazy(() => import('../tools/json/JsonValidator')),
+  'hash-generator': lazy(() => import('../tools/crypto/HashGenerator')),
+  'uuid-generator': lazy(() => import('../tools/crypto/UuidGenerator')),
+  'jwt-decoder': lazy(() => import('../tools/crypto/JwtDecoder')),
+  'password-generator': lazy(() => import('../tools/crypto/PasswordGenerator')),
+  'base64': lazy(() => import('../tools/text/Base64Tool')),
+  'url-encoder': lazy(() => import('../tools/text/UrlEncoder')),
+  'diff-checker': lazy(() => import('../tools/text/DiffChecker')),
+  'markdown-preview': lazy(() => import('../tools/text/MarkdownPreview')),
+  'word-counter': lazy(() => import('../tools/text/WordCounter')),
+  'string-case': lazy(() => import('../tools/text/StringCase')),
+  'lorem-ipsum': lazy(() => import('../tools/text/LoremIpsum')),
+  'gradient-generator': lazy(() => import('../tools/css/GradientGenerator')),
+  'box-shadow': lazy(() => import('../tools/css/BoxShadowGenerator')),
+  'color-converter': lazy(() => import('../tools/css/ColorConverter')),
+  'border-radius': lazy(() => import('../tools/css/BorderRadius')),
+  'html-formatter': lazy(() => import('../tools/formatter/HtmlFormatter')),
+  'js-minifier': lazy(() => import('../tools/formatter/JsMinifier')),
+  'regex-tester': lazy(() => import('../tools/formatter/RegexTester')),
+  'timestamp': lazy(() => import('../tools/misc/TimestampConverter')),
+  'number-base': lazy(() => import('../tools/misc/NumberBase')),
+  'html-entities': lazy(() => import('../tools/misc/HtmlEntities')),
+  'css-minifier': lazy(() => import('../tools/misc/CssMinifier')),
+}
+
+export default function ToolPage() {
+  const { category, toolId } = useParams()
+  const tool = tools.find(t => t.path === `/${category}/${toolId}`)
+
+  if (!tool) {
+    return (
+      <div className="p-6">
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-semibold text-slate-100 mb-2">Tool Not Found</h2>
+          <p className="text-slate-400">The tool you're looking for doesn't exist.</p>
+        </div>
+      </div>
+    )
+  }
+
+  const ToolComponent = toolComponents[tool.id]
+
+  if (!ToolComponent) {
+    return (
+      <div className="p-6">
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-semibold text-slate-100 mb-2">{tool.name}</h2>
+          <p className="text-slate-400">{tool.description}</p>
+          <p className="text-sm text-slate-500 mt-4">Tool implementation coming soon...</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <Suspense fallback={
+      <div className="p-6 flex items-center justify-center h-64">
+        <div className="text-slate-400">Loading...</div>
+      </div>
+    }>
+      <ToolComponent />
+    </Suspense>
+  )
+}
