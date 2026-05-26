@@ -75,6 +75,7 @@ export default function JsonPrettier() {
             value={input}
             onChange={setInput}
             language="json"
+            height="calc(100vh - 280px)"
           />
         </div>
         <div>
@@ -86,6 +87,7 @@ export default function JsonPrettier() {
             onChange={() => {}}
             language="json"
             readOnly
+            height="calc(100vh - 280px)"
           />
         </div>
       </div>

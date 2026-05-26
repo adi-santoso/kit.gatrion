@@ -83,12 +83,13 @@ export default function Base64Tool() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter Base64 to decode...'}
-          className="w-full h-32 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
+          style={{ height: 'calc(100vh - 380px)' }}
+          className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
         />
       </div>
 
       {/* Output */}
-      <div>
+      <div className="flex-1 flex flex-col">
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Output
         </label>
@@ -96,7 +97,8 @@ export default function Base64Tool() {
           value={output}
           readOnly
           placeholder="Result will appear here..."
-          className="w-full h-32 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none resize-none"
+          style={{ height: 'calc(100vh - 380px)' }}
+          className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none resize-none"
         />
         {error && (
           <p className="mt-2 text-sm text-red-400">{error}</p>

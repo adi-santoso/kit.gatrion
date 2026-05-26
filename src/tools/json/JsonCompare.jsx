@@ -57,6 +57,7 @@ export default function JsonCompare() {
             value={jsonA}
             onChange={setJsonA}
             language="json"
+            height="calc(100vh - 320px)"
           />
         </div>
         <div>
@@ -67,6 +68,7 @@ export default function JsonCompare() {
             value={jsonB}
             onChange={setJsonB}
             language="json"
+            height="calc(100vh - 320px)"
           />
         </div>
       </div>
