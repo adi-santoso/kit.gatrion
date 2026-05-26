@@ -10,17 +10,17 @@ export default function Favorites() {
 
   return (
     <motion.div 
-      className="p-6"
+      className="p-4 md:p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">Favorites</h1>
-      <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">Your favorite tools for quick access.</p>
+      <h1 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">Favorites</h1>
+      <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-4 md:mb-6">Your favorite tools for quick access.</p>
 
       {favoriteTools.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-slate-600 dark:text-slate-400">No favorites yet. Star your favorite tools to see them here.</p>
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-400">No favorites yet. Star your favorite tools to see them here.</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

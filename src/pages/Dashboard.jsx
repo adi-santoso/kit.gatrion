@@ -9,22 +9,22 @@ export default function Dashboard() {
 
   return (
     <motion.div 
-      className="p-6"
+      className="p-4 md:p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
       {/* Hero Section */}
-      <div className="mb-12 flex items-center justify-between">
+      <div className="mb-8 md:mb-12 flex items-center justify-between">
         <div className="flex-1">
-          <h1 className="text-4xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">
             <span className="bg-gradient-to-r from-blue-500 to-violet-500 bg-clip-text text-transparent">
               All-in-One Toolkit
             </span>
             <br />
             <span className="text-slate-900 dark:text-slate-100">for Developers</span>
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
+          <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl">
             Kumpulan tools gratis dan lengkap untuk developer. Semua berjalan di browser. Cepat, aman, dan privat.
           </p>
         </div>
@@ -50,11 +50,11 @@ export default function Dashboard() {
       </div>
 
       {/* Popular Tools Section */}
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Popular Tools</h2>
+      <div className="mb-4 md:mb-6 flex items-center justify-between">
+        <h2 className="text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100">Popular Tools</h2>
         <Link
           to="/all"
-          className="flex items-center gap-1 text-sm text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+          className="flex items-center gap-1 text-xs md:text-sm text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
         >
           View all tools
           <ArrowRight size={14} />

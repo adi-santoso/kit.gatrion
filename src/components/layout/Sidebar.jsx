@@ -1,20 +1,38 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info } from 'lucide-react'
+import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X } from 'lucide-react'
 import { categories } from '../../data/tools'
+import { useSidebarStore } from '../../store/sidebarStore'
 
 export default function Sidebar() {
   const location = useLocation()
+  const { isOpen, closeSidebar } = useSidebarStore()
 
   const isActive = (path) => location.pathname === path
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col">
+    <>
+      {/* Backdrop */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={closeSidebar}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <aside className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       {/* Logo */}
-      <div className="h-14 flex items-center px-4 border-b border-slate-200 dark:border-white/[0.06]">
+      <div className="h-14 flex items-center justify-between px-4 border-b border-slate-200 dark:border-white/[0.06]">
         <div className="flex items-center gap-2">
           <div className="text-blue-500 dark:text-blue-400 font-mono text-xl">&lt;/&gt;</div>
           <span className="font-semibold text-slate-900 dark:text-slate-100">DevToolkit</span>
         </div>
+        <button
+          onClick={closeSidebar}
+          className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400"
+        >
+          <X size={20} />
+        </button>
       </div>
 
       {/* Navigation */}
@@ -105,5 +123,6 @@ export default function Sidebar() {
         </div>
       </div>
     </aside>
+    </>
   )
 }

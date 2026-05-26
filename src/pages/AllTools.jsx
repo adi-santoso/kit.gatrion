@@ -6,14 +6,14 @@ import { tools } from '../data/tools'
 export default function AllTools() {
   return (
     <motion.div 
-      className="p-6"
+      className="p-4 md:p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">All Tools</h1>
-        <p className="text-slate-600 dark:text-slate-400">
+      <div className="mb-4 md:mb-6">
+        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">All Tools</h1>
+        <p className="text-sm md:text-base text-slate-600 dark:text-slate-400">
           {tools.length} tools tersedia untuk membantu pekerjaan Anda
         </p>
       </div>

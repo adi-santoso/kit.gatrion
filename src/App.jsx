@@ -41,7 +41,7 @@ function App() {
       <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
         <Sidebar />
         <motion.div 
-          className="flex-1 ml-64 flex flex-col overflow-hidden"
+          className="flex-1 lg:ml-64 flex flex-col overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}

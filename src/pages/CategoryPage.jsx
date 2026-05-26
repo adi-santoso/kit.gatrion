@@ -20,19 +20,19 @@ export default function CategoryPage() {
 
   return (
     <motion.div 
-      className="p-6"
+      className="p-4 md:p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-blue-500/10 rounded-lg">
-          <CategoryIcon className="text-blue-400" size={24} />
+      <div className="flex items-center gap-3 mb-4 md:mb-6">
+        <div className="p-2 md:p-3 bg-blue-500/10 rounded-lg">
+          <CategoryIcon className="text-blue-400" size={20} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">{categoryData.label}</h1>
-          <p className="text-slate-600 dark:text-slate-400 text-sm">{categoryTools.length} tools available</p>
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100">{categoryData.label}</h1>
+          <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm">{categoryTools.length} tools available</p>
         </div>
       </div>
 
