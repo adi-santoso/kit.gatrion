@@ -87,6 +87,7 @@ export default function Sidebar() {
             Code2,
             ImageIcon,
             Wrench,
+          }[cat.icon]
 
           return (
             <Link
