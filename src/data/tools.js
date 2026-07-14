@@ -460,5 +460,8 @@ export const categories = [
   { id: 'css', label: 'CSS & Design', icon: 'Palette' },
   { id: 'formatter', label: 'Formatter', icon: 'Code2' },
   { id: 'image', label: 'Image Tools', icon: 'ImageIcon' },
+  { id: 'gamedev', label: 'Game Dev', icon: 'Gamepad2' },
+  { id: 'gamedev', label: 'Game Dev', icon: 'Gamepad2' },
+  { id: 'gamedev', label: 'Game Dev', icon: 'Gamepad2' },
   { id: 'misc', label: 'Misc / Utilities', icon: 'Wrench' },
 ]

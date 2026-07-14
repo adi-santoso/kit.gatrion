@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X, ImageIcon } from 'lucide-react'
+import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X, ImageIcon, Gamepad2 } from 'lucide-react'
 import { categories } from '../../data/tools'
 import { useSidebarStore } from '../../store/sidebarStore'
 
@@ -12,6 +12,7 @@ const categoryColors = {
   formatter: { icon: 'text-orange-500', bg: 'bg-orange-500/10' },
   misc: { icon: 'text-slate-500', bg: 'bg-slate-500/10' },
   image: { icon: 'text-indigo-500', bg: 'bg-indigo-500/10' },
+  gamedev: { icon: 'text-purple-500', bg: 'bg-purple-500/10' },
 }
 
 
@@ -86,6 +87,7 @@ export default function Sidebar() {
             Palette,
             Code2,
             ImageIcon,
+            Gamepad2,
             Wrench,
           }[cat.icon]
 
@@ -131,7 +133,7 @@ export default function Sidebar() {
         <div className="text-xs text-center space-y-2">
           <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400">
             <span className="font-semibold">DevToolkit</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">v0.2.0</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">v0.3.0</span>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
             🛡️ 100% Private • No data sent

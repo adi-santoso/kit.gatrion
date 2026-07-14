@@ -1,16 +1,16 @@
 # 🛠️ DevToolkit
 
-> All-in-One Developer Toolkit — 38 Tools, 100% Client-Side
+> All-in-One Developer Toolkit — 39 Tools, 100% Client-Side
 
 **Live Demo:** [kit.gatrion.my.id](https://kit.gatrion.my.id)
 
-DevToolkit adalah web app lengkap yang menyediakan 38 developer tools untuk produktivitas sehari-hari. Semua processing dilakukan 100% di browser — tidak ada data yang dikirim ke server, tidak ada tracking, tidak ada registrasi.
+DevToolkit adalah web app lengkap yang menyediakan 39 developer tools untuk produktivitas sehari-hari. Semua processing dilakukan 100% di browser — tidak ada data yang dikirim ke server, tidak ada tracking, tidak ada registrasi.
 
 ---
 
 ## ✨ Features
 
-- 🛠️ **38 Tools** tersebar di 7 kategori (JSON, Text, Crypto, CSS, Formatter, Image, Misc)
+- 🛠️ **39 Tools** tersebar di 8 kategori (JSON, Text, Crypto, CSS, Formatter, Image, Game Dev, Misc)
 - 🔒 **100% Client-side** — data tidak pernah keluar dari browser kamu
 - 🌓 **Dark/Light Theme** dengan transisi smooth
 - ⚡ **Fast Search** dengan `Ctrl+K` atau `Cmd+K`
@@ -67,6 +67,14 @@ DevToolkit adalah web app lengkap yang menyediakan 38 developer tools untuk prod
 - **Image Metadata Viewer** — extract EXIF data (camera info, GPS, settings)
 - **Color Picker from Image** — extract palette + pick exact colors (HEX/RGB/HSL)
 - **Barcode Generator** — generate barcode berbagai format (CODE128, EAN13, UPC, dll)
+
+
+### 🎮 Game Dev (1 tool)
+- **Sprite Sheet Splitter** — split sprite sheets into frames dengan animation preview & playback control
+
+
+### 🎮 Game Dev (1 tool)
+- **Sprite Sheet Splitter** — split sprite sheets into frames dengan animation preview & playback control
 
 ### ⚙️ Misc / Utilities (4 tools)
 - **Timestamp Converter** — Unix ↔ human-readable datetime
@@ -218,4 +226,4 @@ MIT License — feel free to use for personal or commercial projects.
 
 [gatrion.my.id](https://gatrion.my.id)
 
-**Version:** v0.2.0
+**Version:** v0.3.0
