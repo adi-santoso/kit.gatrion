@@ -1,14 +1,18 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ChevronRight, Star } from 'lucide-react'
 import { useFavoritesStore } from '../../store/favoritesStore'
 import { useRecentStore } from '../../store/recentStore'
-import { tools } from '../../data/tools'
+import { tools, categories } from '../../data/tools'
 
-export default function ToolLayout({ category, toolName, description, children }) {
+export default function ToolLayout({ title, description, children }) {
+  const location = useLocation()
   const { favorites, toggleFavorite } = useFavoritesStore()
   const { addRecent } = useRecentStore()
-  const tool = tools.find(t => t.category === category && t.name === toolName)
+
+  // Auto-detect tool from URL path
+  const tool = tools.find(t => location.pathname === t.path)
+  const categoryData = tool ? categories.find(c => c.id === tool.category) : null
   const isFavorite = tool && favorites.includes(tool.id)
 
   // Track recent tool usage
@@ -26,15 +30,21 @@ export default function ToolLayout({ category, toolName, description, children }
           Dashboard
         </Link>
         <ChevronRight size={14} />
-        <span className="capitalize">{category}</span>
-        <ChevronRight size={14} />
-        <span className="text-slate-700 dark:text-slate-300">{toolName}</span>
+        {categoryData && (
+          <>
+            <Link to={`/${tool.category}`} className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors capitalize">
+              {categoryData.label}
+            </Link>
+            <ChevronRight size={14} />
+          </>
+        )}
+        <span className="text-slate-700 dark:text-slate-300">{title}</span>
       </div>
 
       {/* Tool Header */}
       <div className="mb-6 flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">{toolName}</h1>
+          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">{title}</h1>
           <p className="text-sm text-slate-600 dark:text-slate-400">{description}</p>
         </div>
         {tool && (
