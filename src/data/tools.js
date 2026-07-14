@@ -11,6 +11,7 @@ export const tools = [
     tags: ['json', 'format', 'beautify'],
     path: '/json/prettier',
     popular: true,
+    badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'json-compare',
@@ -23,6 +24,7 @@ export const tools = [
     tags: ['json', 'compare', 'diff'],
     path: '/json/compare',
     popular: true,
+    badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'json-to-csv',
@@ -73,6 +75,7 @@ export const tools = [
     tags: ['base64', 'encode', 'decode'],
     path: '/text/base64',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'url-encoder',
@@ -109,6 +112,7 @@ export const tools = [
     tags: ['markdown', 'preview', 'html'],
     path: '/text/markdown-preview',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'word-counter',
@@ -159,6 +163,7 @@ export const tools = [
     tags: ['hash', 'md5', 'sha'],
     path: '/crypto/hash-generator',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'uuid-generator',
@@ -171,6 +176,7 @@ export const tools = [
     tags: ['uuid', 'generate'],
     path: '/crypto/uuid-generator',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'jwt-decoder',
@@ -183,6 +189,7 @@ export const tools = [
     tags: ['jwt', 'decode', 'token'],
     path: '/crypto/jwt-decoder',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'password-generator',
@@ -209,6 +216,7 @@ export const tools = [
     tags: ['css', 'gradient', 'design'],
     path: '/css/gradient-generator',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
   {
     id: 'box-shadow',
@@ -283,6 +291,7 @@ export const tools = [
     tags: ['regex', 'test', 'match'],
     path: '/formatter/regex-tester',
     popular: true,
+  badge: { type: 'popular', label: 'Popular' }
   },
 
   // Misc / Utilities (4 tools)

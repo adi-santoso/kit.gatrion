@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X } from 'lucide-react'
 import { categories } from '../../data/tools'
 import { useSidebarStore } from '../../store/sidebarStore'
@@ -20,12 +22,24 @@ export default function Sidebar() {
       )}
       
       {/* Sidebar */}
-      <aside className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <motion.aside
+        drag={isOpen ? "x" : false}
+        dragConstraints={{ left: -256, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={(e, { offset }) => {
+          if (offset.x < -100) closeSidebar()
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       {/* Logo */}
       <div className="h-14 flex items-center justify-between px-4 border-b border-slate-200 dark:border-white/[0.06]">
-        <div className="flex items-center gap-2">
-          <div className="text-blue-500 dark:text-blue-400 font-mono text-xl">&lt;/&gt;</div>
-          <span className="font-semibold text-slate-900 dark:text-slate-100">DevToolkit</span>
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-500 rounded-lg flex items-center justify-center text-white font-mono text-sm shadow-sm">
+            &lt;/&gt;
+          </div>
+          <span className="font-bold text-slate-900 dark:text-slate-100 tracking-tight">DevToolkit</span>
         </div>
         <button
           onClick={closeSidebar}
@@ -77,7 +91,9 @@ export default function Sidebar() {
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300'
               }`}
             >
-              <Icon size={16} />
+              <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${categoryColors[cat.id]?.bg || 'bg-slate-100'}`}>
+                <Icon size={14} className={categoryColors[cat.id]?.icon || 'text-slate-500'} />
+              </div>
               <span className="text-sm font-medium">{cat.label}</span>
             </Link>
           )
@@ -103,26 +119,26 @@ export default function Sidebar() {
       </nav>
 
       {/* App Info Card */}
-      <div className="p-4 border-t border-slate-200 dark:border-white/[0.06]">
-        <div className="bg-slate-100 dark:bg-gray-800/50 rounded-lg p-3 text-xs text-slate-600 dark:text-slate-400 space-y-1">
-          <div className="flex items-center justify-between">
-            <span className="font-semibold text-slate-900 dark:text-slate-300">DevToolkit v0.1.0</span>
-            <span>🛡️</span>
+      <div className="p-3 border-t border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02]">
+        <div className="text-xs text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400">
+            <span className="font-semibold">DevToolkit</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">v0.1.0</span>
           </div>
-          <p>100% Client-side</p>
-          <p>No data leaves your browser</p>
+          <p className="text-slate-600 dark:text-slate-400">
+            🛡️ 100% Private • No data sent
+          </p>
           <a
             href="https://gatrion.my.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors mt-2"
+            className="inline-flex items-center gap-1 text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors font-medium"
           >
-            <span>←</span>
-            <span>gatrion.my.id</span>
+            Built by gatrion →
           </a>
         </div>
       </div>
-    </aside>
+    </motion.aside>
     </>
   )
 }

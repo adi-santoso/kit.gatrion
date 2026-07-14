@@ -8,8 +8,47 @@ export default function About() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <h1 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">About DevToolkit</h1>
-      <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-4 md:mb-6">All-in-One Toolkit for Developers</p>
+      <div className="mb-8">
+        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl flex items-center justify-center text-white font-mono text-2xl mb-4 shadow-lg">
+          &lt;/&gt;
+        </div>
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">
+          <span className="bg-gradient-to-r from-blue-500 to-violet-500 bg-clip-text text-transparent">
+            About DevToolkit
+          </span>
+        </h1>
+      </div>
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
+          <div className="text-2xl md:text-3xl font-bold text-blue-500 mb-1">27</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Tools</div>
+        </div>
+        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl p-4 text-center">
+          <div className="text-2xl md:text-3xl font-bold text-green-500 mb-1">100%</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Free</div>
+        </div>
+        <div className="bg-gradient-to-br from-violet-500/10 to-purple-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
+          <div className="text-2xl md:text-3xl font-bold text-violet-500 mb-1">6</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Categories</div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
+          <div className="text-2xl md:text-3xl font-bold text-blue-500 mb-1">27</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Tools</div>
+        </div>
+        <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl p-4 text-center">
+          <div className="text-2xl md:text-3xl font-bold text-green-500 mb-1">100%</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Free</div>
+        </div>
+        <div className="bg-gradient-to-br from-violet-500/10 to-purple-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
+          <div className="text-2xl md:text-3xl font-bold text-violet-500 mb-1">6</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Categories</div>
+        </div>
+      </div>
 
       <div className="space-y-4 md:space-y-6">
         <section className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-xl p-4 md:p-6">

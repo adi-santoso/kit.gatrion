@@ -12,6 +12,6 @@ export default function Button({ children, variant = 'primary', onClick, classNa
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   )
 }

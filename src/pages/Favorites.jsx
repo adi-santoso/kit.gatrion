@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import * as Icons from 'lucide-react'
 import { useFavoritesStore } from '../store/favoritesStore'
 import { tools } from '../data/tools'
+import EmptyState from '../components/ui/EmptyState'
+import Button from '../components/ui/Button'
 
 export default function Favorites() {
   const { favorites } = useFavoritesStore()
@@ -19,9 +21,16 @@ export default function Favorites() {
       <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-4 md:mb-6">Your favorite tools for quick access.</p>
 
       {favoriteTools.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-sm md:text-base text-slate-600 dark:text-slate-400">No favorites yet. Star your favorite tools to see them here.</p>
-        </div>
+        <EmptyState
+          icon="Star"
+          title="No favorites yet"
+          description="Star your favorite tools to see them here for quick access."
+          action={
+            <Link to="/">
+              <Button>Explore Tools</Button>
+            </Link>
+          }
+        />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {favoriteTools.map((tool) => {

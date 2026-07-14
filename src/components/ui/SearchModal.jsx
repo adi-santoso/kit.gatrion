@@ -4,6 +4,7 @@ import { X, Search } from 'lucide-react'
 import * as Icons from 'lucide-react'
 import { useSearchStore } from '../../store/searchStore'
 import { tools } from '../../data/tools'
+import EmptyState from './EmptyState'
 
 export default function SearchModal() {
   const { isOpen, query, closeSearch, setQuery } = useSearchStore()
@@ -56,9 +57,12 @@ export default function SearchModal() {
         {/* Results */}
         <div className="max-h-96 overflow-y-auto p-2">
           {results.length === 0 && query && (
-            <div className="text-center py-8 text-slate-500 dark:text-slate-400 text-sm">
-              No tools found
-            </div>
+            <EmptyState
+              icon="SearchX"
+              title="No tools found"
+              description={`No results for "${query}"`}
+              className="py-8"
+            />
           )}
           {results.map((tool) => {
             const Icon = Icons[tool.icon]
