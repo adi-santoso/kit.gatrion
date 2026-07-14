@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X } from 'lucide-react'
+import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X, ImageIcon } from 'lucide-react'
 import { categories } from '../../data/tools'
 import { useSidebarStore } from '../../store/sidebarStore'
 
@@ -11,7 +11,9 @@ const categoryColors = {
   css: { icon: 'text-pink-500', bg: 'bg-pink-500/10' },
   formatter: { icon: 'text-orange-500', bg: 'bg-orange-500/10' },
   misc: { icon: 'text-slate-500', bg: 'bg-slate-500/10' },
+  image: { icon: 'text-indigo-500', bg: 'bg-indigo-500/10' },
 }
+
 
 export default function Sidebar() {
   const location = useLocation()
@@ -83,8 +85,8 @@ export default function Sidebar() {
             Lock,
             Palette,
             Code2,
+            ImageIcon,
             Wrench,
-          }[cat.icon]
 
           return (
             <Link
