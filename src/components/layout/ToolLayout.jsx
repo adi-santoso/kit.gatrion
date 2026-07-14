@@ -1,35 +1,15 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronRight, Star } from 'lucide-react'
 import { useFavoritesStore } from '../../store/favoritesStore'
 import { useRecentStore } from '../../store/recentStore'
-import { useRecentStore } from '../../store/recentStore'
-import { useRecentStore } from '../../store/recentStore'
 import { tools } from '../../data/tools'
-import { useEffect } from 'react'
-import { useEffect } from 'react'
-import { useEffect } from 'react'
 
 export default function ToolLayout({ category, toolName, description, children }) {
   const { favorites, toggleFavorite } = useFavoritesStore()
   const { addRecent } = useRecentStore()
-  const { addRecent } = useRecentStore()
-  const { addRecent } = useRecentStore()
   const tool = tools.find(t => t.category === category && t.name === toolName)
   const isFavorite = tool && favorites.includes(tool.id)
-
-  // Track recent tool usage
-  useEffect(() => {
-    if (tool) {
-      addRecent(tool.id)
-    }
-  }, [tool, addRecent])
-
-  // Track recent tool usage
-  useEffect(() => {
-    if (tool) {
-      addRecent(tool.id)
-    }
-  }, [tool, addRecent])
 
   // Track recent tool usage
   useEffect(() => {

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 export default function Button({ children, variant = 'primary', onClick, className = '', ...props }) {
   const variants = {
     primary: 'bg-blue-500 hover:bg-blue-600 text-white',
@@ -6,9 +8,11 @@ export default function Button({ children, variant = 'primary', onClick, classNa
   }
 
   return (
-    <button
+    <motion.button
       onClick={onClick}
       className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${variants[variant]} ${className}`}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       {...props}
     >
       {children}

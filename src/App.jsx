@@ -7,85 +7,13 @@ import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
 import SearchModal from './components/ui/SearchModal'
 import ToastContainer from './components/ui/Toast'
+import KeyboardShortcuts from './components/ui/KeyboardShortcuts'
 import Dashboard from './pages/Dashboard'
 import AllTools from './pages/AllTools'
 import CategoryPage from './pages/CategoryPage'
 import ToolPage from './pages/ToolPage'
 import Favorites from './pages/Favorites'
 import About from './pages/About'
-
-
-function AnimatedRoutes() {
-  const location = useLocation()
-
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Dashboard />
-          </motion.div>
-        } />
-        <Route path="/all" element={
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <AllTools />
-          </motion.div>
-        } />
-        <Route path="/favorites" element={
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Favorites />
-          </motion.div>
-        } />
-        <Route path="/about" element={
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <About />
-          </motion.div>
-        } />
-        <Route path="/:category" element={
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <CategoryPage />
-          </motion.div>
-        } />
-        <Route path="/:category/:toolId" element={
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ToolPage />
-          </motion.div>
-        } />
-      </Routes>
-    </AnimatePresence>
-  )
-}
-
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -161,7 +89,8 @@ function AnimatedRoutes() {
 function App() {
   const theme = useThemeStore((state) => state.theme)
   const { openSearch, closeSearch } = useSearchStore()
-      
+  const [showShortcuts, setShowShortcuts] = useState(false)
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
   }, [theme])
@@ -190,7 +119,7 @@ function App() {
     <Router>
       <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
         <Sidebar />
-        <motion.div 
+        <motion.div
           className="flex-1 lg:ml-64 flex flex-col overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -199,19 +128,13 @@ function App() {
           <Header />
           <main className="flex-1 overflow-y-auto">
             <AnimatedRoutes />
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/all" element={<AllTools />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/:category" element={<CategoryPage />} />
-              <Route path="/:category/:toolId" element={<ToolPage />} />
-            </main>
+          </main>
         </motion.div>
         <SearchModal />
         <ToastContainer />
-        <KeyboardShortcuts 
-          isOpen={showShortcuts} 
-          onClose={() => setShowShortcuts(false)} 
+        <KeyboardShortcuts
+          isOpen={showShortcuts}
+          onClose={() => setShowShortcuts(false)}
         />
       </div>
     </Router>
