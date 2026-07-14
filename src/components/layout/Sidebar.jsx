@@ -34,7 +34,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <motion.aside
-        drag={isOpen ? "x" : false}
+        drag={false}
         dragConstraints={{ left: -256, right: 0 }}
         dragElastic={0.2}
         onDragEnd={(e, { offset }) => {
@@ -54,6 +54,12 @@ export default function Sidebar() {
             e.stopPropagation()
             e.preventDefault()
             console.log('Close button clicked')
+            closeSidebar()
+          }}
+          onTouchEnd={(e) => {
+            e.stopPropagation()
+            e.preventDefault()
+            console.log('Touch end on close button')
             closeSidebar()
           }}
           className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 relative z-10"
