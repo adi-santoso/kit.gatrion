@@ -357,6 +357,19 @@ export const tools = [
     path: '/image/resizer',
     popular: false
   },
+  {
+    id: 'image-filter',
+    name: 'Image Filter & Editor',
+    description: 'Apply filters dan adjustment ke gambar.',
+    category: 'image',
+    icon: 'Wand2',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'filter', 'edit'],
+    path: '/image/filter',
+    popular: false
+  },
+  {
 
   // Misc / Utilities (4 tools)
   {
