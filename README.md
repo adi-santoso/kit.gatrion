@@ -1,16 +1,16 @@
 # 🛠️ DevToolkit
 
-> All-in-One Developer Toolkit — 39 Tools, 100% Client-Side
+> All-in-One Developer Toolkit — 44 Tools, 100% Client-Side
 
 **Live Demo:** [kit.gatrion.my.id](https://kit.gatrion.my.id)
 
-DevToolkit adalah web app lengkap yang menyediakan 39 developer tools untuk produktivitas sehari-hari. Semua processing dilakukan 100% di browser — tidak ada data yang dikirim ke server, tidak ada tracking, tidak ada registrasi.
+DevToolkit adalah web app lengkap yang menyediakan 44 developer tools untuk produktivitas sehari-hari. Semua processing dilakukan 100% di browser — tidak ada data yang dikirim ke server, tidak ada tracking, tidak ada registrasi.
 
 ---
 
 ## ✨ Features
 
-- 🛠️ **39 Tools** tersebar di 8 kategori (JSON, Text, Crypto, CSS, Formatter, Image, Game Dev, Misc)
+- 🛠️ **44 Tools** tersebar di 8 kategori (JSON, Text, Crypto, CSS, Formatter, Image, Game Dev, Misc)
 - 🔒 **100% Client-side** — data tidak pernah keluar dari browser kamu
 - 🌓 **Dark/Light Theme** dengan transisi smooth
 - ⚡ **Fast Search** dengan `Ctrl+K` atau `Cmd+K`
@@ -69,12 +69,22 @@ DevToolkit adalah web app lengkap yang menyediakan 39 developer tools untuk prod
 - **Barcode Generator** — generate barcode berbagai format (CODE128, EAN13, UPC, dll)
 
 
-### 🎮 Game Dev (1 tool)
+### 🎮 Game Dev (6 tools)
 - **Sprite Sheet Splitter** — split sprite sheets into frames dengan animation preview & playback control
+- **Asset Size Calculator** — hitung total size game assets dan breakdown per kategori
+- **Pixel Art Palette Extractor** — extract unique colors dari pixel art dengan frequency count
+- **Sprite Animation Preview** — upload multiple frames dan preview sebagai animasi
+- **Texture Atlas Generator** — gabungkan banyak image jadi 1 atlas + JSON/XML map
+- **Tilemap Editor** — simple grid editor untuk level design dengan tileset
 
 
-### 🎮 Game Dev (1 tool)
+### 🎮 Game Dev (6 tools)
 - **Sprite Sheet Splitter** — split sprite sheets into frames dengan animation preview & playback control
+- **Asset Size Calculator** — hitung total size game assets dan breakdown per kategori
+- **Pixel Art Palette Extractor** — extract unique colors dari pixel art dengan frequency count
+- **Sprite Animation Preview** — upload multiple frames dan preview sebagai animasi
+- **Texture Atlas Generator** — gabungkan banyak image jadi 1 atlas + JSON/XML map
+- **Tilemap Editor** — simple grid editor untuk level design dengan tileset
 
 ### ⚙️ Misc / Utilities (4 tools)
 - **Timestamp Converter** — Unix ↔ human-readable datetime
@@ -226,4 +236,4 @@ MIT License — feel free to use for personal or commercial projects.
 
 [gatrion.my.id](https://gatrion.my.id)
 
-**Version:** v0.3.0
+**Version:** v0.4.0

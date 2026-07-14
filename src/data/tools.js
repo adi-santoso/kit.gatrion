@@ -420,6 +420,128 @@ export const tools = [
     popular: false
   },
 
+  {
+    id: 'asset-size-calculator',
+    name: 'Asset Size Calculator',
+    description: 'Hitung total size game assets dan breakdown per kategori.',
+    category: 'gamedev',
+    icon: 'FolderOpen',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/asset-size-calculator',
+    popular: false
+  },
+  {
+    id: 'pixel-art-palette',
+    name: 'Pixel Art Palette Extractor',
+    description: 'Extract unique colors dari pixel art dengan frequency count.',
+    category: 'gamedev',
+    icon: 'Palette',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/pixel-art-palette',
+    popular: false
+  },
+  {
+    id: 'sprite-animation-preview',
+    name: 'Sprite Animation Preview',
+    description: 'Upload multiple frames dan preview sebagai animasi.',
+    category: 'gamedev',
+    icon: 'Film',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/sprite-animation-preview',
+    popular: false
+  },
+  {
+    id: 'texture-atlas-generator',
+    name: 'Texture Atlas Generator',
+    description: 'Gabungkan banyak image jadi 1 atlas + JSON/XML map.',
+    category: 'gamedev',
+    icon: 'Package',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/texture-atlas-generator',
+    popular: false
+  },
+  {
+    id: 'tilemap-editor',
+    name: 'Tilemap Editor',
+    description: 'Simple grid editor untuk level design dengan tileset.',
+    category: 'gamedev',
+    icon: 'Grid3x3',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/tilemap-editor',
+    popular: false
+  },
+
+  {
+    id: 'asset-size-calculator',
+    name: 'Asset Size Calculator',
+    description: 'Hitung total size game assets dan breakdown per kategori.',
+    category: 'gamedev',
+    icon: 'FolderOpen',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/asset-size-calculator',
+    popular: false
+  },
+  {
+    id: 'pixel-art-palette',
+    name: 'Pixel Art Palette Extractor',
+    description: 'Extract unique colors dari pixel art dengan frequency count.',
+    category: 'gamedev',
+    icon: 'Palette',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/pixel-art-palette',
+    popular: false
+  },
+  {
+    id: 'sprite-animation-preview',
+    name: 'Sprite Animation Preview',
+    description: 'Upload multiple frames dan preview sebagai animasi.',
+    category: 'gamedev',
+    icon: 'Film',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/sprite-animation-preview',
+    popular: false
+  },
+  {
+    id: 'texture-atlas-generator',
+    name: 'Texture Atlas Generator',
+    description: 'Gabungkan banyak image jadi 1 atlas + JSON/XML map.',
+    category: 'gamedev',
+    icon: 'Package',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/texture-atlas-generator',
+    popular: false
+  },
+  {
+    id: 'tilemap-editor',
+    name: 'Tilemap Editor',
+    description: 'Simple grid editor untuk level design dengan tileset.',
+    category: 'gamedev',
+    icon: 'Grid3x3',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['game', 'dev', 'tools'],
+    path: '/gamedev/tilemap-editor',
+    popular: false
+  },
+
   // Misc / Utilities (4 tools)
   {
     id: 'timestamp',
