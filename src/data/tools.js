@@ -294,7 +294,7 @@ export const tools = [
   badge: { type: 'popular', label: 'Popular' }
   },
 
-  // Image Tools (1 tool)
+  // Image Tools (2 tools)
   {
     id: 'image-compressor',
     name: 'Image Compressor',
@@ -305,6 +305,45 @@ export const tools = [
     iconBg: 'bg-indigo-500/10',
     tags: ['image', 'compress', 'optimize'],
     path: '/image/compressor',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR code dari text atau URL.',
+    category: 'image',
+    icon: 'QrCode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['qr', 'code', 'generator'],
+    path: '/image/qr-generator',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR code dari text atau URL.',
+    category: 'image',
+    icon: 'QrCode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['qr', 'code', 'generator'],
+    path: '/image/qr-generator',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR code dari text atau URL.',
+    category: 'image',
+    icon: 'QrCode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['qr', 'code', 'generator'],
+    path: '/image/qr-generator',
     popular: true,
     badge: { type: 'popular', label: 'Popular' }
   },

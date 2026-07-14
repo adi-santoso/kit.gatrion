@@ -1,0 +1,26 @@
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR code dari text atau URL.',
+    category: 'image',
+    icon: 'QrCode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['qr', 'code', 'generator'],
+    path: '/image/qr-generator',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR code dari text atau URL.',
+    category: 'image',
+    icon: 'QrCode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['qr', 'code', 'generator'],
+    path: '/image/qr-generator',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
