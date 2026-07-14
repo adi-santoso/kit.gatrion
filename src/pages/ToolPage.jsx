@@ -44,16 +44,6 @@ const toolComponents = {
   'sprite-animation-preview': lazy(() => import('../tools/gamedev/SpriteAnimationPreview')),
   'texture-atlas-generator': lazy(() => import('../tools/gamedev/TextureAtlasGenerator')),
   'tilemap-editor': lazy(() => import('../tools/gamedev/TilemapEditor')),
-  'asset-size-calculator': lazy(() => import('../tools/gamedev/AssetSizeCalculator')),
-  'pixel-art-palette': lazy(() => import('../tools/gamedev/PixelArtPalette')),
-  'sprite-animation-preview': lazy(() => import('../tools/gamedev/SpriteAnimationPreview')),
-  'texture-atlas-generator': lazy(() => import('../tools/gamedev/TextureAtlasGenerator')),
-  'tilemap-editor': lazy(() => import('../tools/gamedev/TilemapEditor')),
-  'timestamp': lazy(() => import('../tools/misc/TimestampConverter')),
-  'number-base': lazy(() => import('../tools/misc/NumberBase')),
-  'html-entities': lazy(() => import('../tools/misc/HtmlEntities')),
-  'css-minifier': lazy(() => import('../tools/misc/CssMinifier')),
-}
 
 export default function ToolPage() {
   const { category, toolId } = useParams()

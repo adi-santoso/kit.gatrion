@@ -50,9 +50,11 @@ export default function Sidebar() {
           <span className="font-bold text-slate-900 dark:text-slate-100 tracking-tight">DevToolkit</span>
         </div>
         <button
-          onClick={closeSidebar}
+          onClick={(e) => {
+            e.stopPropagation()
+            closeSidebar()
+          }}
           className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 relative z-10"
-          onPointerDown={(e) => e.stopPropagation()}
         >
           <X size={20} />
         </button>
