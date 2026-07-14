@@ -382,6 +382,19 @@ export const tools = [
     popular: false
   },
   {
+    id: 'color-picker',
+    name: 'Color Picker from Image',
+    description: 'Extract color palette dan pick warna dari gambar.',
+    category: 'image',
+    icon: 'Pipette',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'color', 'palette'],
+    path: '/image/color-picker',
+    popular: false
+  },
+  {
+  {
   {
 
   // Misc / Utilities (4 tools)
