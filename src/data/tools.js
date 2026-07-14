@@ -333,6 +333,18 @@ export const tools = [
     path: '/image/to-base64',
     popular: false
   },
+  {
+    id: 'image-format-converter',
+    name: 'Image Format Converter',
+    description: 'Convert image antara PNG, JPEG, dan WebP.',
+    category: 'image',
+    icon: 'FileImage',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'convert', 'format'],
+    path: '/image/format-converter',
+    popular: false
+  },
 
   // Misc / Utilities (4 tools)
   {
