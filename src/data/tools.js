@@ -405,14 +405,6 @@ export const tools = [
     path: '/image/barcode-generator',
     popular: false
   },
-  {
-  {
-  {
-  {
-
-  // Misc / Utilities (4 tools)
-  {
-    id: 'timestamp',
     name: 'Timestamp Converter',
     description: 'Unix ↔ human-readable datetime.',
     category: 'misc',

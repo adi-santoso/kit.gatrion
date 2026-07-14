@@ -131,7 +131,7 @@ export default function Sidebar() {
         <div className="text-xs text-center space-y-2">
           <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400">
             <span className="font-semibold">DevToolkit</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">v0.1.0</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">v0.2.0</span>
           </div>
           <p className="text-slate-600 dark:text-slate-400">
             🛡️ 100% Private • No data sent

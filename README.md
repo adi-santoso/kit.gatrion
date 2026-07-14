@@ -1,16 +1,16 @@
 # 🛠️ DevToolkit
 
-> All-in-One Developer Toolkit — 28 Tools, 100% Client-Side
+> All-in-One Developer Toolkit — 38 Tools, 100% Client-Side
 
 **Live Demo:** [kit.gatrion.my.id](https://kit.gatrion.my.id)
 
-DevToolkit adalah web app lengkap yang menyediakan 28 developer tools untuk produktivitas sehari-hari. Semua processing dilakukan 100% di browser — tidak ada data yang dikirim ke server, tidak ada tracking, tidak ada registrasi.
+DevToolkit adalah web app lengkap yang menyediakan 38 developer tools untuk produktivitas sehari-hari. Semua processing dilakukan 100% di browser — tidak ada data yang dikirim ke server, tidak ada tracking, tidak ada registrasi.
 
 ---
 
 ## ✨ Features
 
-- 🛠️ **28 Tools** tersebar di 6 kategori (JSON, Text, Crypto, CSS, Formatter, Misc)
+- 🛠️ **38 Tools** tersebar di 7 kategori (JSON, Text, Crypto, CSS, Formatter, Image, Misc)
 - 🔒 **100% Client-side** — data tidak pernah keluar dari browser kamu
 - 🌓 **Dark/Light Theme** dengan transisi smooth
 - ⚡ **Fast Search** dengan `Ctrl+K` atau `Cmd+K`
@@ -57,6 +57,17 @@ DevToolkit adalah web app lengkap yang menyediakan 28 developer tools untuk prod
 - **JS Minifier** — minify JavaScript code
 - **Regex Tester** — test regex dengan highlight match real-time
 
+### 🖼️ Image Tools (9 tools)
+- **Image Compressor** — compress gambar untuk reduce file size
+- **QR Code Generator** — generate QR code dari text/URL dengan customization
+- **Image to Base64** — convert image ↔ Base64 encoding (bidirectional)
+- **Image Format Converter** — convert PNG/JPEG/WebP dengan quality control
+- **Image Resizer & Crop** — resize atau crop dengan preset dimensions (Instagram, Facebook, dll)
+- **Image Filter & Editor** — 8 adjustments + 8 preset filters (Vintage, B&W, Vibrant, dll)
+- **Image Metadata Viewer** — extract EXIF data (camera info, GPS, settings)
+- **Color Picker from Image** — extract palette + pick exact colors (HEX/RGB/HSL)
+- **Barcode Generator** — generate barcode berbagai format (CODE128, EAN13, UPC, dll)
+
 ### ⚙️ Misc / Utilities (4 tools)
 - **Timestamp Converter** — Unix ↔ human-readable datetime
 - **Number Base Converter** — Binary, Octal, Decimal, Hex
@@ -76,6 +87,9 @@ DevToolkit adalah web app lengkap yang menyediakan 28 developer tools untuk prod
 | **Code Editor** | CodeMirror 6 with syntax highlighting |
 | **Icons** | Lucide React |
 | **Animations** | Framer Motion |
+| **Image Processing** | browser-image-compression, Canvas API |
+| **QR/Barcode** | qrcode.react, JsBarcode |
+| **EXIF** | exifr |
 | **Utils** | crypto-js, diff, marked, DOMPurify, js-yaml |
 
 ---
@@ -106,7 +120,7 @@ npm run preview
 
 ```bash
 npm run dev      # Start Vite dev server
-npm run build    # Build optimized production bundle
+npm run build    # Build optimized production bundle + pre-render
 npm run preview  # Preview production build locally
 ```
 
@@ -116,18 +130,20 @@ npm run preview  # Preview production build locally
 
 ```
 devtoolkit/
-├── public/              # Static assets
+├── public/              # Static assets (favicon, og-image, robots.txt, sitemap.xml)
+├── scripts/             # Pre-rendering script untuk SEO
 ├── src/
 │   ├── components/
 │   │   ├── layout/      # Sidebar, Header, ToolLayout
 │   │   └── ui/          # Reusable UI components
 │   ├── pages/           # Dashboard, ToolPage, Favorites, About
-│   ├── tools/           # 28 tool implementations
+│   ├── tools/           # 38 tool implementations
 │   │   ├── json/        # JSON tools (5)
 │   │   ├── text/        # Text & String tools (7)
 │   │   ├── crypto/      # Crypto & Security tools (4)
 │   │   ├── css/         # CSS & Design tools (4)
 │   │   ├── formatter/   # Formatter tools (3)
+│   │   ├── image/       # Image tools (9) ← NEW!
 │   │   └── misc/        # Misc / Utilities (4)
 │   ├── store/           # Zustand stores (theme, favorites, recent, search)
 │   ├── data/            # Tools registry & categories
@@ -147,7 +163,7 @@ Semua operasi dilakukan di browser kamu. Tidak ada data yang dikirim ke server e
 ### No Tracking
 - ❌ No analytics
 - ❌ No cookies (kecuali localStorage untuk preferences)
-- ❌ No third-party scripts
+- ❌ No third-party scripts (hanya CDN untuk libraries)
 - ❌ No telemetry
 
 ### Open Source
@@ -162,6 +178,9 @@ Kamu bisa audit sendiri source code untuk memverifikasi bahwa tidak ada data exf
 - **Security & Crypto** — hash, UUID, JWT decode, password generation
 - **CSS Utilities** — gradients, shadows, colors, border radius
 - **Code Formatting** — HTML/JS/CSS formatter & minifier
+- **Image Processing** — compress, convert, resize, crop, filters
+- **QR/Barcode** — generate QR codes & barcodes dengan customization
+- **Image Analysis** — metadata/EXIF reader, color palette extraction
 - **Quick Conversions** — timestamp, number base, HTML entities
 
 ---
@@ -172,8 +191,9 @@ Kamu bisa audit sendiri source code untuk memverifikasi bahwa tidak ada data exf
 - [ ] More tools: SQL formatter, cron expression parser, JWT encoder
 - [ ] Keyboard shortcuts untuk semua tools
 - [ ] PWA support (offline mode)
-- [ ] Dark mode improvements
 - [ ] Multi-language support (EN/ID)
+- [ ] Batch image processing
+- [ ] Video tools (thumbnail extractor, format converter)
 
 ---
 
@@ -198,4 +218,4 @@ MIT License — feel free to use for personal or commercial projects.
 
 [gatrion.my.id](https://gatrion.my.id)
 
-**Version:** v0.1.0
+**Version:** v0.2.0
