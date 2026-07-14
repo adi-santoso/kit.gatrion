@@ -345,6 +345,18 @@ export const tools = [
     path: '/image/format-converter',
     popular: false
   },
+  {
+    id: 'image-resizer',
+    name: 'Image Resizer & Crop',
+    description: 'Resize atau crop gambar dengan preset dimensi.',
+    category: 'image',
+    icon: 'Maximize2',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'resize', 'crop'],
+    path: '/image/resizer',
+    popular: false
+  },
 
   // Misc / Utilities (4 tools)
   {

@@ -33,6 +33,7 @@ const toolComponents = {
   'qr-code-generator': lazy(() => import('../tools/image/QRCodeGenerator')),
   'image-to-base64': lazy(() => import('../tools/image/ImageToBase64')),
   'image-format-converter': lazy(() => import('../tools/image/ImageFormatConverter')),
+  'image-resizer': lazy(() => import('../tools/image/ImageResizer')),
   'timestamp': lazy(() => import('../tools/misc/TimestampConverter')),
   'number-base': lazy(() => import('../tools/misc/NumberBase')),
   'html-entities': lazy(() => import('../tools/misc/HtmlEntities')),
