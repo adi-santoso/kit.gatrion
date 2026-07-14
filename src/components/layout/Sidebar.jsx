@@ -52,9 +52,12 @@ export default function Sidebar() {
         <button
           onClick={(e) => {
             e.stopPropagation()
+            e.preventDefault()
+            console.log('Close button clicked')
             closeSidebar()
           }}
           className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 relative z-10"
+          style={{ touchAction: 'none', pointerEvents: 'auto' }}
         >
           <X size={20} />
         </button>
