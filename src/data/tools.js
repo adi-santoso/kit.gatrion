@@ -294,7 +294,7 @@ export const tools = [
   badge: { type: 'popular', label: 'Popular' }
   },
 
-  // Image Tools (2 tools)
+  // Image Tools (3 tools)
   {
     id: 'image-compressor',
     name: 'Image Compressor',
@@ -322,17 +322,28 @@ export const tools = [
     badge: { type: 'popular', label: 'Popular' }
   },
   {
-    id: 'qr-code-generator',
-    name: 'QR Code Generator',
-    description: 'Generate QR code dari text atau URL.',
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert image ke Base64 dan sebaliknya.',
     category: 'image',
-    icon: 'QrCode',
+    icon: 'Binary',
     iconColor: 'text-indigo-400',
     iconBg: 'bg-indigo-500/10',
-    tags: ['qr', 'code', 'generator'],
-    path: '/image/qr-generator',
-    popular: true,
-    badge: { type: 'popular', label: 'Popular' }
+    tags: ['image', 'base64', 'encode'],
+    path: '/image/to-base64',
+    popular: false
+  },
+  {
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert image ke Base64 dan sebaliknya.',
+    category: 'image',
+    icon: 'Binary',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'base64', 'encode'],
+    path: '/image/to-base64',
+    popular: false
   },
   {
     id: 'qr-code-generator',
@@ -346,6 +357,67 @@ export const tools = [
     path: '/image/qr-generator',
     popular: true,
     badge: { type: 'popular', label: 'Popular' }
+  },
+  {
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert image ke Base64 dan sebaliknya.',
+    category: 'image',
+    icon: 'Binary',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'base64', 'encode'],
+    path: '/image/to-base64',
+    popular: false
+  },
+  {
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert image ke Base64 dan sebaliknya.',
+    category: 'image',
+    icon: 'Binary',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'base64', 'encode'],
+    path: '/image/to-base64',
+    popular: false
+  },
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR code dari text atau URL.',
+    category: 'image',
+    icon: 'QrCode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['qr', 'code', 'generator'],
+    path: '/image/qr-generator',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
+  {
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert image ke Base64 dan sebaliknya.',
+    category: 'image',
+    icon: 'Binary',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'base64', 'encode'],
+    path: '/image/to-base64',
+    popular: false
+  },
+  {
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert image ke Base64 dan sebaliknya.',
+    category: 'image',
+    icon: 'Binary',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'base64', 'encode'],
+    path: '/image/to-base64',
+    popular: false
   },
 
   // Misc / Utilities (4 tools)
