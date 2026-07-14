@@ -34,12 +34,6 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <motion.aside
-        drag={false}
-        dragConstraints={{ left: -256, right: 0 }}
-        dragElastic={0.2}
-        onDragEnd={(e, { offset }) => {
-          if (offset.x < -100) closeSidebar()
-        }}
         className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       {/* Logo */}
       <div className="h-14 flex items-center justify-between px-4 border-b border-slate-200 dark:border-white/[0.06]">
