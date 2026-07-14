@@ -1,9 +1,17 @@
-import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X } from 'lucide-react'
 import { categories } from '../../data/tools'
 import { useSidebarStore } from '../../store/sidebarStore'
+
+const categoryColors = {
+  json: { icon: 'text-blue-500', bg: 'bg-blue-500/10' },
+  text: { icon: 'text-green-500', bg: 'bg-green-500/10' },
+  crypto: { icon: 'text-violet-500', bg: 'bg-violet-500/10' },
+  css: { icon: 'text-pink-500', bg: 'bg-pink-500/10' },
+  formatter: { icon: 'text-orange-500', bg: 'bg-orange-500/10' },
+  misc: { icon: 'text-slate-500', bg: 'bg-slate-500/10' },
+}
 
 export default function Sidebar() {
   const location = useLocation()
@@ -15,12 +23,12 @@ export default function Sidebar() {
     <>
       {/* Backdrop */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={closeSidebar}
         />
       )}
-      
+
       {/* Sidebar */}
       <motion.aside
         drag={isOpen ? "x" : false}
@@ -29,9 +37,6 @@ export default function Sidebar() {
         onDragEnd={(e, { offset }) => {
           if (offset.x < -100) closeSidebar()
         }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
         className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       {/* Logo */}
       <div className="h-14 flex items-center justify-between px-4 border-b border-slate-200 dark:border-white/[0.06]">
