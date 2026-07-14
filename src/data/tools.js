@@ -370,6 +370,19 @@ export const tools = [
     popular: false
   },
   {
+    id: 'image-metadata',
+    name: 'Image Metadata Viewer',
+    description: 'Lihat metadata dan EXIF data dari gambar.',
+    category: 'image',
+    icon: 'Info',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'metadata', 'exif'],
+    path: '/image/metadata',
+    popular: false
+  },
+  {
+  {
 
   // Misc / Utilities (4 tools)
   {
