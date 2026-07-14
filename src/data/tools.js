@@ -294,7 +294,7 @@ export const tools = [
   badge: { type: 'popular', label: 'Popular' }
   },
 
-  // Image Tools (3 tools)
+  // Image Tools (9 tools)
   {
     id: 'image-compressor',
     name: 'Image Compressor',
@@ -405,6 +405,24 @@ export const tools = [
     path: '/image/barcode-generator',
     popular: false
   },
+
+  // Game Dev (1 tool)
+  {
+    id: 'sprite-sheet-splitter',
+    name: 'Sprite Sheet Splitter',
+    description: 'Split sprite sheets into frames dengan animation preview.',
+    category: 'gamedev',
+    icon: 'Grid3x3',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['sprite', 'game', 'animation'],
+    path: '/gamedev/sprite-sheet-splitter',
+    popular: false
+  },
+
+  // Misc / Utilities (4 tools)
+  {
+    id: 'timestamp',
     name: 'Timestamp Converter',
     description: 'Unix ↔ human-readable datetime.',
     category: 'misc',
@@ -460,8 +478,6 @@ export const categories = [
   { id: 'css', label: 'CSS & Design', icon: 'Palette' },
   { id: 'formatter', label: 'Formatter', icon: 'Code2' },
   { id: 'image', label: 'Image Tools', icon: 'ImageIcon' },
-  { id: 'gamedev', label: 'Game Dev', icon: 'Gamepad2' },
-  { id: 'gamedev', label: 'Game Dev', icon: 'Gamepad2' },
   { id: 'gamedev', label: 'Game Dev', icon: 'Gamepad2' },
   { id: 'misc', label: 'Misc / Utilities', icon: 'Wrench' },
 ]
