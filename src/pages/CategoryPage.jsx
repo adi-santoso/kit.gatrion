@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { tools, categories } from '../data/tools'
 import { ToolBadge } from '../components/ui/Badge'
 import * as Icons from 'lucide-react'
+import SEO from '../components/SEO'
 
 export default function CategoryPage() {
   const { category } = useParams()
@@ -20,12 +21,18 @@ export default function CategoryPage() {
   const CategoryIcon = Icons[categoryData.icon]
 
   return (
-    <motion.div
-      className="p-4 md:p-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
+    <>
+      <SEO
+        title={`${categoryData.label} Tools | DevToolkit`}
+        description={`${categoryTools.length} ${categoryData.label} tools gratis untuk developer. 100% client-side processing, no registration required.`}
+        canonical={`https://kit.gatrion.my.id/${category}`}
+      />
+      <motion.div
+        className="p-4 md:p-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
       {/* Header */}
       <div className="flex items-center gap-3 mb-4 md:mb-6">
         <div className="p-2 md:p-3 bg-blue-500/10 rounded-lg">
@@ -81,5 +88,6 @@ export default function CategoryPage() {
         })}
       </motion.div>
     </motion.div>
+    </>
   )
 }

@@ -1,0 +1,14 @@
+# robots.txt for DevToolkit
+# https://kit.gatrion.my.id
+
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths (if any in future)
+# Disallow: /admin/
+
+# Sitemap
+Sitemap: https://kit.gatrion.my.id/sitemap.xml
+
+# Crawl-delay for polite bots
+Crawl-delay: 1

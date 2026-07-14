@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { tools } from '../data/tools'
+import { tools, categories } from '../data/tools'
+import SEO from '../components/SEO'
+import { ToolSchema, BreadcrumbSchema } from '../components/StructuredData'
 
 const toolComponents = {
   'json-prettier': lazy(() => import('../tools/json/JsonPrettier')),
@@ -49,6 +51,13 @@ export default function ToolPage() {
   }
 
   const ToolComponent = toolComponents[tool.id]
+  const categoryData = categories.find(c => c.id === tool.category)
+
+  const breadcrumbItems = [
+    { name: 'Home', url: 'https://kit.gatrion.my.id' },
+    { name: categoryData?.label || tool.category, url: `https://kit.gatrion.my.id/${tool.category}` },
+    { name: tool.name, url: `https://kit.gatrion.my.id${tool.path}` }
+  ]
 
   if (!ToolComponent) {
     return (
@@ -63,18 +72,27 @@ export default function ToolPage() {
   }
 
   return (
-    <Suspense fallback={
-      <div className="p-6 flex items-center justify-center h-64">
-        <div className="text-slate-400">Loading...</div>
-      </div>
-    }>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <ToolComponent />
-      </motion.div>
-    </Suspense>
+    <>
+      <SEO
+        title={`${tool.name} | DevToolkit`}
+        description={`${tool.description} — Online tool gratis, 100% client-side processing.`}
+        canonical={`https://kit.gatrion.my.id${tool.path}`}
+      />
+      <ToolSchema tool={tool} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Suspense fallback={
+        <div className="p-6 flex items-center justify-center h-64">
+          <div className="text-slate-400">Loading...</div>
+        </div>
+      }>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ToolComponent />
+        </motion.div>
+      </Suspense>
+    </>
   )
 }

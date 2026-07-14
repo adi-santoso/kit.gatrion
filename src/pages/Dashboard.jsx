@@ -5,17 +5,23 @@ import * as Icons from 'lucide-react'
 import { tools } from '../data/tools'
 import { ToolBadge } from '../components/ui/Badge'
 import RecentTools from '../components/ui/RecentTools'
+import SEO from '../components/SEO'
+import { WebSiteSchema, SoftwareApplicationSchema } from '../components/StructuredData'
 
 export default function Dashboard() {
   const popularTools = tools.filter(tool => tool.popular)
 
   return (
-    <motion.div
-      className="p-4 md:p-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
+    <>
+      <SEO />
+      <WebSiteSchema />
+      <SoftwareApplicationSchema />
+      <motion.div
+        className="p-4 md:p-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
       {/* Hero Section */}
       <div className="mb-8 md:mb-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8">
         <div className="flex-1 w-full">
@@ -128,5 +134,6 @@ export default function Dashboard() {
         })}
       </motion.div>
     </motion.div>
+    </>
   )
 }
