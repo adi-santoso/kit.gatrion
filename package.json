@@ -18,6 +18,7 @@
     "@codemirror/view": "^6.34.1",
     "@uiw/codemirror-theme-github": "^4.25.10",
     "@uiw/react-codemirror": "^4.23.5",
+    "browser-image-compression": "^2.0.2",
     "crypto-js": "^4.2.0",
     "diff": "^7.0.0",
     "dompurify": "^3.1.7",

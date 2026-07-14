@@ -294,6 +294,21 @@ export const tools = [
   badge: { type: 'popular', label: 'Popular' }
   },
 
+  // Image Tools (1 tool)
+  {
+    id: 'image-compressor',
+    name: 'Image Compressor',
+    description: 'Compress gambar untuk mengurangi ukuran file.',
+    category: 'image',
+    icon: 'ImageDown',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['image', 'compress', 'optimize'],
+    path: '/image/compressor',
+    popular: true,
+    badge: { type: 'popular', label: 'Popular' }
+  },
+
   // Misc / Utilities (4 tools)
   {
     id: 'timestamp',
@@ -351,5 +366,6 @@ export const categories = [
   { id: 'crypto', label: 'Crypto & Security', icon: 'Lock' },
   { id: 'css', label: 'CSS & Design', icon: 'Palette' },
   { id: 'formatter', label: 'Formatter', icon: 'Code2' },
+  { id: 'image', label: 'Image Tools', icon: 'ImageIcon' },
   { id: 'misc', label: 'Misc / Utilities', icon: 'Wrench' },
 ]

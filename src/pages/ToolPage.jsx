@@ -29,6 +29,7 @@ const toolComponents = {
   'html-formatter': lazy(() => import('../tools/formatter/HtmlFormatter')),
   'js-minifier': lazy(() => import('../tools/formatter/JsMinifier')),
   'regex-tester': lazy(() => import('../tools/formatter/RegexTester')),
+  'image-compressor': lazy(() => import('../tools/image/ImageCompressor')),
   'timestamp': lazy(() => import('../tools/misc/TimestampConverter')),
   'number-base': lazy(() => import('../tools/misc/NumberBase')),
   'html-entities': lazy(() => import('../tools/misc/HtmlEntities')),
