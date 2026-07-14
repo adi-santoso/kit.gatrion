@@ -51,7 +51,8 @@ export default function Sidebar() {
         </div>
         <button
           onClick={closeSidebar}
-          className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400"
+          className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 relative z-10"
+          onPointerDown={(e) => e.stopPropagation()}
         >
           <X size={20} />
         </button>
