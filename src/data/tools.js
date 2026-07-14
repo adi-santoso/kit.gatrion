@@ -394,6 +394,19 @@ export const tools = [
     popular: false
   },
   {
+    id: 'barcode-generator',
+    name: 'Barcode Generator',
+    description: 'Generate barcode dari text dengan berbagai format.',
+    category: 'image',
+    icon: 'Barcode',
+    iconColor: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10',
+    tags: ['barcode', 'generator', 'code'],
+    path: '/image/barcode-generator',
+    popular: false
+  },
+  {
+  {
   {
   {
 
