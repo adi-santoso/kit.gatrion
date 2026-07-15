@@ -22,6 +22,13 @@ export default function Sidebar() {
 
   const isActive = (path) => location.pathname === path
 
+  // Close sidebar on navigation (mobile only)
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) { // lg breakpoint
+      closeSidebar()
+    }
+  }
+
   return (
     <>
       {/* Backdrop */}
@@ -66,6 +73,7 @@ export default function Sidebar() {
         {/* Dashboard */}
         <Link
           to="/"
+          onClick={handleLinkClick}
           className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-lg transition-colors ${
             isActive('/')
               ? 'bg-blue-500/10 border-l-2 border-blue-500 text-blue-500 dark:text-blue-400'
@@ -103,6 +111,7 @@ export default function Sidebar() {
             <Link
               key={cat.id}
               to={`/${cat.id}`}
+              onClick={handleLinkClick}
               className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-lg transition-colors ${
                 location.pathname.startsWith(`/${cat.id}`)
                   ? 'bg-blue-500/10 border-l-2 border-blue-500 text-blue-500 dark:text-blue-400'
@@ -121,6 +130,7 @@ export default function Sidebar() {
         <div className="mt-6 border-t border-slate-200 dark:border-white/[0.06] pt-4">
           <Link
             to="/favorites"
+            onClick={handleLinkClick}
             className="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
           >
             <Star size={16} />
@@ -128,6 +138,7 @@ export default function Sidebar() {
           </Link>
           <Link
             to="/about"
+            onClick={handleLinkClick}
             className="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
           >
             <Info size={16} />
