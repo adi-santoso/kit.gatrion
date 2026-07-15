@@ -406,7 +406,7 @@ export const tools = [
     popular: false
   },
 
-  // Game Dev (1 tool)
+  // Game Dev (6 tools)
   {
     id: 'sprite-sheet-splitter',
     name: 'Sprite Sheet Splitter',
@@ -417,6 +417,66 @@ export const tools = [
     iconBg: 'bg-purple-500/10',
     tags: ['sprite', 'game', 'animation'],
     path: '/gamedev/sprite-sheet-splitter',
+    popular: false
+  },
+  {
+    id: 'asset-size-calculator',
+    name: 'Asset Size Calculator',
+    description: 'Hitung ukuran asset game dan estimasi bandwidth.',
+    category: 'gamedev',
+    icon: 'Calculator',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['asset', 'size', 'calculator'],
+    path: '/gamedev/asset-size-calculator',
+    popular: false
+  },
+  {
+    id: 'pixel-art-palette',
+    name: 'Pixel Art Palette',
+    description: 'Generate dan explore color palette untuk pixel art.',
+    category: 'gamedev',
+    icon: 'Palette',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['pixel', 'art', 'palette', 'color'],
+    path: '/gamedev/pixel-art-palette',
+    popular: false
+  },
+  {
+    id: 'sprite-animation-preview',
+    name: 'Sprite Animation Preview',
+    description: 'Preview dan test sprite animation dengan kontrol frame rate.',
+    category: 'gamedev',
+    icon: 'Play',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['sprite', 'animation', 'preview'],
+    path: '/gamedev/sprite-animation-preview',
+    popular: false
+  },
+  {
+    id: 'texture-atlas-generator',
+    name: 'Texture Atlas Generator',
+    description: 'Combine multiple images into texture atlas dengan metadata.',
+    category: 'gamedev',
+    icon: 'Package',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['texture', 'atlas', 'spritesheet'],
+    path: '/gamedev/texture-atlas-generator',
+    popular: false
+  },
+  {
+    id: 'tilemap-editor',
+    name: 'Tilemap Editor',
+    description: 'Simple tilemap editor untuk game 2D dengan export JSON.',
+    category: 'gamedev',
+    icon: 'Grid2x2',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    tags: ['tilemap', 'editor', '2d'],
+    path: '/gamedev/tilemap-editor',
     popular: false
   },
 
