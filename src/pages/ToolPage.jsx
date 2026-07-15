@@ -44,6 +44,7 @@ const toolComponents = {
   'sprite-animation-preview': lazy(() => import('../tools/gamedev/SpriteAnimationPreview')),
   'texture-atlas-generator': lazy(() => import('../tools/gamedev/TextureAtlasGenerator')),
   'tilemap-editor': lazy(() => import('../tools/gamedev/TilemapEditor')),
+}
 
 export default function ToolPage() {
   const { category, toolId } = useParams()
