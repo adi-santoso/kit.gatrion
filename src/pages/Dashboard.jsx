@@ -10,6 +10,7 @@ import { WebSiteSchema, SoftwareApplicationSchema } from '../components/Structur
 
 export default function Dashboard() {
   const popularTools = tools.filter(tool => tool.popular)
+  const totalTools = tools.length
 
   return (
     <>
@@ -46,10 +47,10 @@ export default function Dashboard() {
             <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                <span>27 Tools</span>
+                <span>{totalTools}+ Tools</span>
               </div>
               <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></div>
-              <span>100% Free</span>
+              <span>100% Client-Side</span>
             </div>
           </div>
         </div>
