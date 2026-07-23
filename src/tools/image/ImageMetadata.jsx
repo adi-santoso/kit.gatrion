@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react'
 import { Upload, Image as ImageIcon, Camera, MapPin, Calendar, Info } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { readImageFile } from '../../utils/imageResourceValidation'
+import exifr from 'exifr'
 
 export default function ImageMetadata() {
   const [image, setImage] = useState(null)
@@ -14,48 +16,40 @@ export default function ImageMetadata() {
 
     setLoading(true)
 
-    const reader = new FileReader()
-    reader.onload = async (event) => {
-      setImage(event.target.result)
-      
-      // Extract basic metadata
-      const img = new Image()
-      img.onload = () => {
-        const basicMeta = {
-          fileName: file.name,
-          fileSize: (file.size / 1024).toFixed(2) + ' KB',
-          fileType: file.type,
-          width: img.width,
-          height: img.height,
-          aspectRatio: (img.width / img.height).toFixed(2),
-          megapixels: ((img.width * img.height) / 1000000).toFixed(2) + ' MP',
-          lastModified: new Date(file.lastModified).toLocaleString(),
-        }
-
-        // Try to extract EXIF if exifr is available
-        extractExif(file, basicMeta)
+    try {
+      const { dataUrl, width, height } = await readImageFile(file)
+      setImage(dataUrl)
+      const basicMeta = {
+        fileName: file.name,
+        fileSize: (file.size / 1024).toFixed(2) + ' KB',
+        fileType: file.type,
+        width,
+        height,
+        aspectRatio: (width / height).toFixed(2),
+        megapixels: ((width * height) / 1000000).toFixed(2) + ' MP',
+        lastModified: new Date(file.lastModified).toLocaleString(),
       }
-      img.src = event.target.result
+      extractExif(file, basicMeta)
+    } catch (error) {
+      setLoading(false)
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const extractExif = async (file, basicMeta) => {
     try {
-      // Check if exifr is available
-      if (typeof window !== 'undefined' && window.exifr) {
-        const exifData = await window.exifr.parse(file, {
-          tiff: true,
-          exif: true,
-          gps: true,
-          iptc: true,
-          icc: true,
-        })
+      const exifData = await exifr.parse(file, {
+        tiff: true,
+        exif: true,
+        gps: true,
+        iptc: true,
+        icc: true,
+      })
 
-        if (exifData) {
-          setMetadata({
-            ...basicMeta,
-            exif: {
+      if (exifData) {
+        setMetadata({
+          ...basicMeta,
+          exif: {
               make: exifData.Make || 'N/A',
               model: exifData.Model || 'N/A',
               software: exifData.Software || 'N/A',
@@ -69,11 +63,8 @@ export default function ImageMetadata() {
               whiteBalance: exifData.WhiteBalance || 'N/A',
               latitude: exifData.latitude ? exifData.latitude.toFixed(6) : null,
               longitude: exifData.longitude ? exifData.longitude.toFixed(6) : null,
-            }
-          })
-        } else {
-          setMetadata({ ...basicMeta, exif: null })
-        }
+          }
+        })
       } else {
         setMetadata({ ...basicMeta, exif: null })
       }

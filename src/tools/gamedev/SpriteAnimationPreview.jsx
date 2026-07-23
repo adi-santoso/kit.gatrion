@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Upload, Play, Pause, X, Download, Plus } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_SPRITE_FRAMES, readImageFile } from '../../utils/imageResourceValidation'
 
 export default function SpriteAnimationPreview() {
   const [frames, setFrames] = useState([])
@@ -11,25 +12,26 @@ export default function SpriteAnimationPreview() {
   const [scale, setScale] = useState(2)
   const animationRef = useRef(null)
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files)
-    addFrames(files)
+    if (frames.length + files.length > MAX_SPRITE_FRAMES) {
+      alert(`Sprite animations support a maximum of ${MAX_SPRITE_FRAMES} frames.`)
+      return
+    }
+    await addFrames(files)
+    e.target.value = ''
   }
 
-  const addFrames = (files) => {
-    const imageFiles = files.filter(f => f.type.startsWith('image/'))
-    
-    imageFiles.forEach((file, idx) => {
-      const reader = new FileReader()
-      reader.onload = (event) => {
-        setFrames(prev => [...prev, {
-          id: Date.now() + idx,
-          name: file.name,
-          dataUrl: event.target.result
-        }])
-      }
-      reader.readAsDataURL(file)
-    })
+  const addFrames = async (files) => {
+    try {
+      const loaded = await Promise.all(files.map(async (file, idx) => {
+        const { dataUrl } = await readImageFile(file)
+        return { id: Date.now() + idx, name: file.name, dataUrl }
+      }))
+      setFrames(prev => [...prev, ...loaded])
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   useEffect(() => {

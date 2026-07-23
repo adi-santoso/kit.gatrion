@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Upload, Grid3x3, Save, Trash2, Download, Move, Eraser, Paintbrush } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { readImageFile } from '../../utils/imageResourceValidation'
 
 export default function TilemapEditor() {
   const [tileset, setTileset] = useState(null)
@@ -16,21 +17,18 @@ export default function TilemapEditor() {
   const canvasRef = useRef(null)
   const tilesetCanvasRef = useRef(null)
 
-  const handleTilesetUpload = (e) => {
+  const handleTilesetUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const img = new Image()
-      img.onload = () => {
-        setTileset(img)
-        setTilesetUrl(event.target.result)
-        extractTiles(img)
-      }
-      img.src = event.target.result
+    try {
+      const { dataUrl, image } = await readImageFile(file)
+      setTileset(image)
+      setTilesetUrl(dataUrl)
+      extractTiles(image)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const extractTiles = (img) => {

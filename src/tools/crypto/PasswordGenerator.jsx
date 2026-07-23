@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ToolLayout from '../../components/layout/ToolLayout'
 import Button from '../../components/ui/Button'
 import CopyButton from '../../components/ui/CopyButton'
+import { secureRandomInt, shuffleSecure } from '../../utils/secureRandom'
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState('')
@@ -21,21 +22,17 @@ export default function PasswordGenerator() {
       symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?',
     }
 
-    let charset = ''
-    Object.keys(options).forEach(key => {
-      if (options[key]) charset += chars[key]
-    })
+    const selectedSets = Object.keys(options).filter(key => options[key]).map(key => chars[key])
+    const charset = selectedSets.join('')
 
     if (!charset) {
       alert('Please select at least one character type')
       return
     }
 
-    let result = ''
-    for (let i = 0; i < length; i++) {
-      result += charset.charAt(Math.floor(Math.random() * charset.length))
-    }
-    setPassword(result)
+    const result = selectedSets.map(set => set[secureRandomInt(set.length)])
+    while (result.length < length) result.push(charset[secureRandomInt(charset.length)])
+    setPassword(shuffleSecure(result).join(''))
   }
 
   return (

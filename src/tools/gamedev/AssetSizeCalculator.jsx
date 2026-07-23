@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Upload, X, Plus, Trash2, Download, FolderOpen } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { validateResourceFile } from '../../utils/imageResourceValidation'
 
 export default function AssetSizeCalculator() {
   const [assets, setAssets] = useState([])
@@ -27,6 +28,12 @@ export default function AssetSizeCalculator() {
   }
 
   const addFiles = (files) => {
+    try {
+      files.forEach(file => validateResourceFile(file))
+    } catch (error) {
+      alert(error.message)
+      return
+    }
     const newAssets = files.map((file, idx) => ({
       id: Date.now() + idx,
       name: file.name,

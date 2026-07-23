@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { Upload, Download, Grid3x3, Package, Trash2 } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_ATLAS_DIMENSION, MAX_ATLAS_FILES, readImageFile, validateCanvasDimensions } from '../../utils/imageResourceValidation'
 
 export default function TextureAtlasGenerator() {
   const [images, setImages] = useState([])
@@ -11,29 +12,32 @@ export default function TextureAtlasGenerator() {
   const [powerOfTwo, setPowerOfTwo] = useState(true)
   const canvasRef = useRef(null)
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files)
-    loadImages(files)
+    if (images.length + files.length > MAX_ATLAS_FILES) {
+      alert(`Texture atlas supports a maximum of ${MAX_ATLAS_FILES} files.`)
+      return
+    }
+    await loadImages(files)
+    e.target.value = ''
   }
 
-  const loadImages = (files) => {
-    files.forEach((file) => {
-      const reader = new FileReader()
-      reader.onload = (event) => {
-        const img = new Image()
-        img.onload = () => {
-          setImages(prev => [...prev, {
-            id: Date.now() + Math.random(),
-            name: file.name.replace(/\.[^/.]+$/, ''), // Remove extension
-            img: img,
-            width: img.width,
-            height: img.height
-          }])
+  const loadImages = async (files) => {
+    try {
+      const loaded = await Promise.all(files.map(async (file) => {
+        const { image, width, height } = await readImageFile(file, { maxDimension: MAX_ATLAS_DIMENSION })
+        return {
+          id: Date.now() + Math.random(),
+          name: file.name.replace(/\.[^/.]+$/, ''),
+          img: image,
+          width,
+          height
         }
-        img.src = event.target.result
-      }
-      reader.readAsDataURL(file)
-    })
+      }))
+      setImages(prev => [...prev, ...loaded])
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   const generateAtlas = () => {
@@ -78,6 +82,13 @@ export default function TextureAtlasGenerator() {
     if (powerOfTwo) {
       atlasWidth = nextPowerOfTwo(atlasWidth)
       atlasHeight = nextPowerOfTwo(atlasHeight)
+    }
+
+    try {
+      validateCanvasDimensions(atlasWidth, atlasHeight, MAX_ATLAS_DIMENSION, 'Atlas')
+    } catch (error) {
+      alert(error.message)
+      return
     }
 
     // Create canvas

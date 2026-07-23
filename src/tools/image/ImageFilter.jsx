@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Upload, Download, RotateCcw, Image as ImageIcon } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, readImageFile } from '../../utils/imageResourceValidation'
 
 export default function ImageFilter() {
   const [image, setImage] = useState(null)
@@ -26,15 +27,16 @@ export default function ImageFilter() {
     { name: 'Soft', values: { brightness: 110, contrast: 80, saturation: 90, blur: 1, grayscale: 0, sepia: 0, hueRotate: 0, invert: 0 } },
   ]
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      setImage(event.target.result)
+    try {
+      const { dataUrl } = await readImageFile(file, { maxDimension: MAX_CANVAS_DIMENSION })
+      setImage(dataUrl)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const applyPreset = (preset) => {
@@ -81,6 +83,7 @@ export default function ImageFilter() {
         URL.revokeObjectURL(url)
       })
     }
+    img.onerror = () => alert('Failed to decode the image for export.')
     img.src = image
   }
 

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Download, FileText, Copy, Check } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import JsBarcode from 'jsbarcode'
 
 export default function BarcodeGenerator() {
   const [text, setText] = useState('')
@@ -23,35 +24,20 @@ export default function BarcodeGenerator() {
 
   useEffect(() => {
     if (text && canvasRef.current) {
-      generateBarcode()
+      try {
+        JsBarcode(canvasRef.current, text, { format, width, height, displayValue, margin: 10 })
+        setError(null)
+      } catch (err) {
+        setError(err.message || 'Invalid barcode format')
+      }
     }
   }, [text, format, width, height, displayValue])
-
-  const generateBarcode = () => {
-    try {
-      setError(null)
-      
-      // Check if JsBarcode is available
-      if (typeof window !== 'undefined' && window.JsBarcode) {
-        window.JsBarcode(canvasRef.current, text, {
-          format: format,
-          width: width,
-          height: height,
-          displayValue: displayValue,
-          margin: 10,
-        })
-      } else {
-        setError('JsBarcode library not loaded')
-      }
-    } catch (err) {
-      setError(err.message || 'Invalid barcode format')
-    }
-  }
 
   const handleDownloadPNG = () => {
     if (!canvasRef.current) return
 
     canvasRef.current.toBlob((blob) => {
+      if (!blob) return
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
@@ -65,34 +51,20 @@ export default function BarcodeGenerator() {
 
   const handleDownloadSVG = () => {
     try {
-      const canvas = document.createElement('canvas')
-      
-      if (typeof window !== 'undefined' && window.JsBarcode) {
-        window.JsBarcode(canvas, text, {
-          format: format,
-          width: width,
-          height: height,
-          displayValue: displayValue,
-          margin: 10,
-        })
-
-        // Convert to SVG manually (simple approach)
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
-  <image href="${canvas.toDataURL()}" width="${canvas.width}" height="${canvas.height}"/>
-</svg>`
-        
-        const blob = new Blob([svg], { type: 'image/svg+xml' })
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = `barcode-${text}-${Date.now()}.svg`
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        URL.revokeObjectURL(url)
-      }
+      const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      JsBarcode(svgNode, text, { format, width, height, displayValue, margin: 10, xmlDocument: document })
+      const svg = new XMLSerializer().serializeToString(svgNode)
+      const blob = new Blob([svg], { type: 'image/svg+xml' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `barcode-${text}-${Date.now()}.svg`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
     } catch (err) {
-      console.error('SVG export error:', err)
+      setError(err.message || 'SVG export failed')
     }
   }
 
@@ -147,11 +119,10 @@ export default function BarcodeGenerator() {
           <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-xl p-6">
             <h3 className="text-sm font-medium text-slate-900 dark:text-slate-100 mb-4">Preview</h3>
             {text ? (
-              error ? (
-                <div className="flex items-center justify-center p-8 bg-red-50 dark:bg-red-900/20 rounded-lg"><div className="text-center text-red-600 dark:text-red-400"><FileText size={48} className="mx-auto mb-2 opacity-50" /><p className="text-sm">{error}</p></div></div>
-              ) : (
-                <div className="flex items-center justify-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg"><canvas ref={canvasRef} /></div>
-              )
+              <div className="flex flex-col items-center justify-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                <canvas ref={canvasRef} className={error ? 'hidden' : ''} />
+                {error && <div className="text-center text-red-600 dark:text-red-400"><FileText size={48} className="mx-auto mb-2 opacity-50" /><p className="text-sm">{error}</p></div>}
+              </div>
             ) : (
               <div className="text-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg text-slate-400"><FileText size={48} className="mx-auto mb-2 opacity-50" /><p className="text-sm">Enter text to generate barcode</p></div>
             )}

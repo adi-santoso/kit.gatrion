@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { Upload, Copy, Check, Download, ArrowLeftRight } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { readImageFile } from '../../utils/imageResourceValidation'
 
 export default function ImageToBase64() {
   const [mode, setMode] = useState('encode') // encode or decode
@@ -9,22 +10,17 @@ export default function ImageToBase64() {
   const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
 
-  const handleFileSelect = (e) => {
+  const handleFileSelect = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    if (!file.type.startsWith('image/')) {
-      alert('Please select an image file')
-      return
+    try {
+      const { dataUrl } = await readImageFile(file)
+      setImage(dataUrl)
+      setBase64(dataUrl)
+    } catch (error) {
+      alert(error.message)
     }
-
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      const result = e.target.result
-      setImage(result)
-      setBase64(result)
-    }
-    reader.readAsDataURL(file)
   }
 
   const handleBase64Input = (value) => {

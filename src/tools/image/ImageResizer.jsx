@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { Upload, Download, Image as ImageIcon, Maximize2 } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, readImageFile, validateCanvasDimensions } from '../../utils/imageResourceValidation'
 
 export default function ImageResizer() {
   const [image, setImage] = useState(null)
@@ -23,23 +24,20 @@ export default function ImageResizer() {
     { name: 'Avatar', width: 256, height: 256 },
   ]
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const img = new Image()
-      img.onload = () => {
-        setImage(event.target.result)
-        setOriginalSize({ width: img.width, height: img.height })
-        setNewWidth(img.width)
-        setNewHeight(img.height)
-        setResizedImage(null)
-      }
-      img.src = event.target.result
+    try {
+      const { dataUrl, width, height } = await readImageFile(file)
+      setImage(dataUrl)
+      setOriginalSize({ width, height })
+      setNewWidth(width)
+      setNewHeight(height)
+      setResizedImage(null)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const handleWidthChange = (width) => {
@@ -66,6 +64,13 @@ export default function ImageResizer() {
 
   const processImage = () => {
     if (!image) return
+
+    try {
+      validateCanvasDimensions(newWidth, newHeight, MAX_CANVAS_DIMENSION)
+    } catch (error) {
+      alert(error.message)
+      return
+    }
 
     const img = new Image()
     img.onload = () => {
@@ -102,6 +107,7 @@ export default function ImageResizer() {
 
       setResizedImage(canvas.toDataURL('image/png'))
     }
+    img.onerror = () => alert('Failed to decode the image for resizing.')
     img.src = image
   }
 

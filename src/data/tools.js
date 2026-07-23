@@ -168,7 +168,7 @@ export const tools = [
   {
     id: 'uuid-generator',
     name: 'UUID Generator',
-    description: 'Generate UUID v4, v1, ULID.',
+    description: 'Generate cryptographically secure UUID v4.',
     category: 'crypto',
     icon: 'Key',
     iconColor: 'text-violet-400',

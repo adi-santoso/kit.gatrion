@@ -4,11 +4,7 @@ import Button from '../../components/ui/Button'
 import CopyButton from '../../components/ui/CopyButton'
 
 function generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0
-    const v = c === 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
+  return crypto.randomUUID()
 }
 
 export default function UuidGenerator() {
@@ -28,7 +24,7 @@ export default function UuidGenerator() {
     <ToolLayout
       category="crypto"
       toolName="UUID Generator"
-      description="Generate UUID v4, v1, ULID."
+      description="Generate cryptographically secure UUID v4."
     >
       {/* Controls */}
       <div className="flex items-center gap-3 mb-6">

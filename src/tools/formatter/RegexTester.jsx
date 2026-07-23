@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { findRegexMatches, splitHighlightedText } from '../../utils/regexMatches'
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('')
@@ -8,39 +9,15 @@ export default function RegexTester() {
   const [matches, setMatches] = useState([])
   const [error, setError] = useState('')
 
-  const handleTest = () => {
+  useEffect(() => {
     try {
-      if (!pattern) {
-        setMatches([])
-        setError('')
-        return
-      }
-
-      const regex = new RegExp(pattern, flags)
-      const found = [...testString.matchAll(regex)]
-      setMatches(found.map(m => ({ match: m[0], index: m.index })))
+      setMatches(findRegexMatches(pattern, flags, testString))
       setError('')
     } catch (err) {
       setError(err.message)
       setMatches([])
     }
-  }
-
-  const highlightMatches = () => {
-    if (!matches.length || !testString) return testString
-
-    let result = ''
-    let lastIndex = 0
-
-    matches.forEach(({ match, index }) => {
-      result += testString.slice(lastIndex, index)
-      result += `<mark class="bg-yellow-500/30 text-yellow-200">${match}</mark>`
-      lastIndex = index + match.length
-    })
-    result += testString.slice(lastIndex)
-
-    return result
-  }
+  }, [pattern, flags, testString])
 
   return (
     <ToolLayout
@@ -57,14 +34,14 @@ export default function RegexTester() {
           <input
             type="text"
             value={pattern}
-            onChange={(e) => { setPattern(e.target.value); handleTest(); }}
+            onChange={(e) => setPattern(e.target.value)}
             placeholder="Enter regex pattern..."
             className="flex-1 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-4 py-2 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
           />
           <input
             type="text"
             value={flags}
-            onChange={(e) => { setFlags(e.target.value); handleTest(); }}
+            onChange={(e) => setFlags(e.target.value)}
             placeholder="flags"
             className="w-20 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg px-3 py-2 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50"
           />
@@ -81,7 +58,7 @@ export default function RegexTester() {
         </label>
         <textarea
           value={testString}
-          onChange={(e) => { setTestString(e.target.value); handleTest(); }}
+          onChange={(e) => setTestString(e.target.value)}
           placeholder="Enter text to test..."
           className="w-full h-32 bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-500/50 resize-none"
         />
@@ -92,10 +69,13 @@ export default function RegexTester() {
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Matches: {matches.length}
         </label>
-        <div
-          className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm min-h-[100px] whitespace-pre-wrap"
-          dangerouslySetInnerHTML={{ __html: highlightMatches() }}
-        />
+        <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-lg p-4 text-slate-900 dark:text-slate-100 font-mono text-sm min-h-[100px] whitespace-pre-wrap">
+          {matches.length === 0 ? testString : splitHighlightedText(testString, matches).map(part => (
+            part.highlighted
+              ? <mark key={part.key} className="bg-yellow-500/30 text-yellow-700 dark:text-yellow-200">{part.text}</mark>
+              : <span key={part.key}>{part.text}</span>
+          ))}
+        </div>
       </div>
 
       {/* Match Details */}

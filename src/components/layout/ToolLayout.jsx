@@ -14,6 +14,7 @@ export default function ToolLayout({ title, description, children }) {
   const tool = tools.find(t => location.pathname === t.path)
   const categoryData = tool ? categories.find(c => c.id === tool.category) : null
   const isFavorite = tool && favorites.includes(tool.id)
+  const resolvedTitle = title || tool?.name
 
   // Track recent tool usage
   useEffect(() => {
@@ -38,13 +39,13 @@ export default function ToolLayout({ title, description, children }) {
             <ChevronRight size={14} />
           </>
         )}
-        <span className="text-slate-700 dark:text-slate-300">{title}</span>
+        <span className="text-slate-700 dark:text-slate-300">{resolvedTitle}</span>
       </div>
 
       {/* Tool Header */}
       <div className="mb-6 flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">{title}</h1>
+          <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">{resolvedTitle}</h1>
           <p className="text-sm text-slate-600 dark:text-slate-400">{description}</p>
         </div>
         {tool && (

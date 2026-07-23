@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Upload, Play, Pause, Download, Grid3x3, Package } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, MAX_SPRITE_FRAMES, readImageFile } from '../../utils/imageResourceValidation'
 
 export default function SpriteSheetSplitter() {
   const [image, setImage] = useState(null)
@@ -18,29 +19,38 @@ export default function SpriteSheetSplitter() {
   const canvasRef = useRef(null)
   const animationRef = useRef(null)
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const img = new Image()
-      img.onload = () => {
-        setImage(img)
-        setImageUrl(event.target.result)
-        splitFrames(img, columns, rows, spacing, padding)
-      }
-      img.src = event.target.result
+    try {
+      const { dataUrl, image } = await readImageFile(file, { maxDimension: MAX_CANVAS_DIMENSION })
+      setImage(image)
+      setImageUrl(dataUrl)
+      splitFrames(image, columns, rows, spacing, padding)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const splitFrames = (img, cols, rows, sp, pad) => {
     if (!img) return
 
     const totalFrames = cols * rows
+    if (totalFrames > MAX_SPRITE_FRAMES) {
+      setFrames([])
+      setIsPlaying(false)
+      alert(`Sprite sheets support a maximum of ${MAX_SPRITE_FRAMES} frames.`)
+      return
+    }
     const frameWidth = (img.width - (cols - 1) * sp - 2 * pad) / cols
     const frameHeight = (img.height - (rows - 1) * sp - 2 * pad) / rows
+    if (frameWidth <= 0 || frameHeight <= 0) {
+      setFrames([])
+      setIsPlaying(false)
+      alert('Spacing and padding leave no valid sprite frame area.')
+      return
+    }
 
     const newFrames = []
 

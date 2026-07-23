@@ -2,19 +2,22 @@ import { useState } from 'react'
 import ToolLayout from '../../components/layout/ToolLayout'
 import Button from '../../components/ui/Button'
 import CopyButton from '../../components/ui/CopyButton'
+import { minify as minifyJavaScript } from 'terser'
 
 export default function JsMinifier() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
+  const [error, setError] = useState('')
 
-  const minify = () => {
-    let result = input
-      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
-      .replace(/\/\/.*/g, '') // Remove single-line comments
-      .replace(/\s+/g, ' ') // Replace multiple spaces
-      .replace(/\s*([{}();,:])\s*/g, '$1') // Remove spaces around operators
-      .trim()
-    setOutput(result)
+  const minify = async () => {
+    try {
+      const result = await minifyJavaScript(input)
+      setOutput(result.code || '')
+      setError('')
+    } catch (err) {
+      setOutput('')
+      setError(err.message)
+    }
   }
 
   return (
@@ -29,6 +32,7 @@ export default function JsMinifier() {
         </Button>
         {output && <CopyButton text={output} />}
       </div>
+      {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
 
       <div className="grid grid-cols-2 gap-4">
         <div>

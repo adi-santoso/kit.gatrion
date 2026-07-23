@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Upload, Copy, Check, Download, Palette } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, readImageFile } from '../../utils/imageResourceValidation'
 
 export default function PixelArtPalette() {
   const [image, setImage] = useState(null)
@@ -9,21 +10,18 @@ export default function PixelArtPalette() {
   const [copiedIndex, setCopiedIndex] = useState(null)
   const [sortBy, setSortBy] = useState('frequency') // frequency, hue, brightness
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const img = new Image()
-      img.onload = () => {
-        setImage(img)
-        setImageUrl(event.target.result)
-        extractPalette(img)
-      }
-      img.src = event.target.result
+    try {
+      const { dataUrl, image } = await readImageFile(file, { maxDimension: MAX_CANVAS_DIMENSION })
+      setImage(image)
+      setImageUrl(dataUrl)
+      extractPalette(image)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const extractPalette = (img) => {

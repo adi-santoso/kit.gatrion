@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { Upload, Download, Image as ImageIcon, FileText, Loader2 } from 'lucide-react'
 import imageCompression from 'browser-image-compression'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, readImageFile, validateCanvasDimensions } from '../../utils/imageResourceValidation'
 
 export default function ImageCompressor() {
   const [originalImage, setOriginalImage] = useState(null)
@@ -18,18 +19,14 @@ export default function ImageCompressor() {
     const file = e.target.files?.[0]
     if (!file) return
 
-    if (!file.type.startsWith('image/')) {
-      alert('Please select an image file')
-      return
-    }
-
-    setOriginalSize(file.size)
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      setOriginalImage(e.target.result)
+    try {
+      const { dataUrl } = await readImageFile(file, { maxDimension: MAX_CANVAS_DIMENSION })
+      setOriginalSize(file.size)
+      setOriginalImage(dataUrl)
       setCompressedImage(null)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const handleCompress = async () => {
@@ -37,6 +34,7 @@ export default function ImageCompressor() {
 
     setIsCompressing(true)
     try {
+      validateCanvasDimensions(maxWidth, maxHeight, MAX_CANVAS_DIMENSION, 'Output')
       // Convert base64 to File
       const response = await fetch(originalImage)
       const blob = await response.blob()
@@ -56,6 +54,7 @@ export default function ImageCompressor() {
       reader.onload = (e) => {
         setCompressedImage(e.target.result)
       }
+      reader.onerror = () => alert('Failed to read the compressed image.')
       reader.readAsDataURL(compressedFile)
     } catch (error) {
       console.error('Compression failed:', error)

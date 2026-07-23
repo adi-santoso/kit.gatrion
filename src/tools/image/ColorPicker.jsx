@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { Upload, Copy, Check, Pipette, Image as ImageIcon } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, readImageFile } from '../../utils/imageResourceValidation'
 
 export default function ColorPicker() {
   const [image, setImage] = useState(null)
@@ -11,17 +12,18 @@ export default function ColorPicker() {
   const canvasRef = useRef(null)
   const imgRef = useRef(null)
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      setImage(event.target.result)
+    try {
+      const { dataUrl } = await readImageFile(file, { maxDimension: MAX_CANVAS_DIMENSION })
+      setImage(dataUrl)
       setPalette([])
       setSelectedColor(null)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const handleImageLoad = (e) => {

@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Download, ImageIcon, FileImage } from 'lucide-react'
 import ToolLayout from '../../components/layout/ToolLayout'
+import { MAX_CANVAS_DIMENSION, readImageFile } from '../../utils/imageResourceValidation'
 
 export default function ImageFormatConverter() {
   const [image, setImage] = useState(null)
@@ -9,6 +10,7 @@ export default function ImageFormatConverter() {
   const [quality, setQuality] = useState(0.92)
   const [converting, setConverting] = useState(false)
   const [convertedUrl, setConvertedUrl] = useState(null)
+  const [convertedFormat, setConvertedFormat] = useState(null)
   const [fileSize, setFileSize] = useState({ original: 0, converted: 0 })
   const canvasRef = useRef(null)
 
@@ -18,24 +20,24 @@ export default function ImageFormatConverter() {
     { value: 'webp', label: 'WebP', mime: 'image/webp', hasQuality: true },
   ]
 
-  const handleImageUpload = (e) => {
+  useEffect(() => () => {
+    if (convertedUrl) URL.revokeObjectURL(convertedUrl)
+  }, [convertedUrl])
+
+  const handleImageUpload = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    const type = file.type.split('/')[1]
-    setOriginalFormat(type)
-    setFileSize(prev => ({ ...prev, original: file.size }))
-
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const img = new Image()
-      img.onload = () => {
-        setImage(img)
-        setConvertedUrl(null)
-      }
-      img.src = event.target.result
+    try {
+      const { image: img } = await readImageFile(file, { maxDimension: MAX_CANVAS_DIMENSION })
+      setOriginalFormat(file.type.split('/')[1])
+      setFileSize(prev => ({ ...prev, original: file.size }))
+      setImage(img)
+      setConvertedUrl(null)
+      setConvertedFormat(null)
+    } catch (error) {
+      alert(error.message)
     }
-    reader.readAsDataURL(file)
   }
 
   const handleConvert = async () => {
@@ -58,6 +60,7 @@ export default function ImageFormatConverter() {
           if (blob) {
             const url = URL.createObjectURL(blob)
             setConvertedUrl(url)
+            setConvertedFormat(targetFormat)
             setFileSize(prev => ({ ...prev, converted: blob.size }))
           }
           setConverting(false)
@@ -76,7 +79,7 @@ export default function ImageFormatConverter() {
 
     const link = document.createElement('a')
     link.href = convertedUrl
-    link.download = `converted-${Date.now()}.${targetFormat}`
+    link.download = `converted-${Date.now()}.${convertedFormat}`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -176,7 +179,7 @@ export default function ImageFormatConverter() {
               </div>
 
               <button onClick={handleDownload} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
-                <Download size={18} />Download {targetFormat.toUpperCase()}
+                <Download size={18} />Download {convertedFormat.toUpperCase()}
               </button>
             </>
           )}

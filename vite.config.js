@@ -17,12 +17,4 @@ export default defineConfig({
       }
     }
   },
-  // Pre-render HTML snapshots with react-snap alternative approach
-  // Since we're using react-helmet-async, meta tags will be injected dynamically
-  // This config ensures optimal build output for SEO
-  server: {
-    fs: {
-      strict: false
-    }
-  }
 })

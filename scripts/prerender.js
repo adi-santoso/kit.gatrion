@@ -7,6 +7,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { categories, tools } from '../src/data/tools.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -14,21 +15,13 @@ const __dirname = path.dirname(__filename)
 const distDir = path.join(__dirname, '../dist')
 const baseUrl = 'https://kit.gatrion.my.id'
 
-// Read tools data
-const toolsData = fs.readFileSync(path.join(__dirname, '../src/data/tools.js'), 'utf-8')
-
-// Extract tools array (simple regex parse)
-const toolsMatch = toolsData.match(/export const tools = (\[[\s\S]*?\n\])/m)
-const categoriesMatch = toolsData.match(/export const categories = (\[[\s\S]*?\n\])/m)
-
-if (!toolsMatch || !categoriesMatch) {
-  console.error('Failed to parse tools.js')
-  process.exit(1)
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
 }
-
-// Eval to get actual data (safe in build script context)
-const tools = eval(toolsMatch[1])
-const categories = eval(categoriesMatch[1])
 
 console.log(`📦 Found ${tools.length} tools and ${categories.length} categories`)
 
@@ -40,43 +33,50 @@ const baseHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8')
  */
 function generateHtml(route) {
   let html = baseHtml
+  const title = escapeHtml(route.title)
+  const desc = escapeHtml(route.desc)
+  const canonical = `${baseUrl}${route.path}`
 
   // Replace title
   html = html.replace(
     /<title>.*?<\/title>/,
-    `<title>${route.title}</title>`
+    `<title>${title}</title>`
   )
 
   // Replace description
   html = html.replace(
     /<meta name="description" content=".*?">/,
-    `<meta name="description" content="${route.desc}">`
+    `<meta name="description" content="${desc}">`
   )
 
   // Replace canonical
   html = html.replace(
     /<link rel="canonical" href=".*?">/,
-    `<link rel="canonical" href="${baseUrl}${route.path}">`
+    `<link rel="canonical" href="${canonical}">`
   )
 
   // Replace OG tags
   html = html.replace(
     /<meta property="og:title" content=".*?">/,
-    `<meta property="og:title" content="${route.title}">`
+    `<meta property="og:title" content="${title}">`
   )
   html = html.replace(
     /<meta property="og:description" content=".*?">/,
-    `<meta property="og:description" content="${route.desc}">`
+    `<meta property="og:description" content="${desc}">`
   )
   html = html.replace(
     /<meta property="og:url" content=".*?">/,
-    `<meta property="og:url" content="${baseUrl}${route.path}">`
+    `<meta property="og:url" content="${canonical}">`
   )
 
   // Replace Twitter title
   html = html.replace(
     /<meta name="twitter:title" content=".*?">/,
-    `<meta name="twitter:title" content="${route.title}">`
+    `<meta name="twitter:title" content="${title}">`
+  )
+  html = html.replace(
+    /<meta name="twitter:description" content=".*?">/,
+    `<meta name="twitter:description" content="${desc}">`
   )
 
   return html
@@ -105,12 +105,13 @@ console.log('\n🚀 Pre-rendering HTML files...\n')
 // Homepage already exists, skip it
 console.log('📄 Static pages:')
 const staticRoutes = [
-  { path: '/all', title: 'All Tools | DevToolkit', desc: '28 developer tools dalam satu tempat. Free, fast, dan 100% client-side.' },
+  { path: '/', title: 'DevToolkit', desc: 'Kumpulan tools gratis untuk developer.' },
+  { path: '/all', title: 'All Tools | DevToolkit', desc: `${tools.length} developer tools dalam satu tempat. Free, fast, dan 100% client-side.` },
   { path: '/favorites', title: 'Favorites | DevToolkit', desc: 'Tools favorit kamu.' },
   { path: '/about', title: 'About | DevToolkit', desc: 'Tentang DevToolkit - All-in-One Developer Toolkit.' }
 ]
 
-staticRoutes.forEach(writeRoute)
+staticRoutes.slice(1).forEach(writeRoute)
 
 // Generate category pages
 console.log('\n📂 Category pages:')
@@ -125,12 +126,26 @@ categories.forEach(cat => {
 
 // Generate tool pages
 console.log('\n🔧 Tool pages:')
-tools.forEach(tool => {
-  writeRoute({
-    path: tool.path,
-    title: `${tool.name} | DevToolkit`,
-    desc: `${tool.description} — Online tool gratis, 100% client-side processing.`
-  })
-})
+const toolRoutes = tools.map(tool => ({
+  path: tool.path,
+  title: `${tool.name} | DevToolkit`,
+  desc: `${tool.description} — Online tool gratis, 100% client-side processing.`
+}))
+
+toolRoutes.forEach(writeRoute)
+
+const sitemapRoutes = [
+  ...staticRoutes,
+  ...categories.map(cat => ({ path: `/${cat.id}` })),
+  ...toolRoutes
+]
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapRoutes.map(route => `  <url><loc>${escapeHtml(baseUrl + route.path)}</loc></url>`).join('\n')}
+</urlset>
+`
+
+fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap, 'utf-8')
+console.log(`\n🗺️  Generated sitemap.xml with ${sitemapRoutes.length} routes`)
 
 console.log(`\n✅ Pre-rendering complete! Generated ${3 + categories.length + tools.length} HTML files\n`)
