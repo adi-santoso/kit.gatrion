@@ -10,17 +10,17 @@ const icons = {
 }
 
 const styles = {
-  success: 'bg-green-500/90 text-white border-green-600',
-  error: 'bg-red-500/90 text-white border-red-600',
-  warning: 'bg-yellow-500/90 text-white border-yellow-600',
-  info: 'bg-blue-500/90 text-white border-blue-600',
+  success: 'text-[var(--dt-ink)] [&>svg]:text-green-600',
+  error: 'text-[var(--dt-ink)] [&>svg]:text-[var(--dt-coral)]',
+  warning: 'text-[var(--dt-ink)] [&>svg]:text-amber-600',
+  info: 'text-[var(--dt-ink)] [&>svg]:text-cyan-600',
 }
 
 export default function ToastContainer() {
   const { toasts, removeToast } = useToastStore()
 
   return (
-    <div className="fixed top-4 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full px-4 pointer-events-none">
+    <div className="dt-toast-region pointer-events-none fixed bottom-4 right-4 z-[110] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2" aria-live="polite" aria-relevant="additions">
       <AnimatePresence>
         {toasts.map((toast) => {
           const Icon = icons[toast.type]
@@ -33,14 +33,16 @@ export default function ToastContainer() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, x: 100, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className={`${style} rounded-lg border shadow-lg backdrop-blur-sm p-4 flex items-start gap-3 pointer-events-auto`}
+              role={toast.type === 'error' ? 'alert' : 'status'}
+              className={`dt-toast pointer-events-auto flex items-start gap-3 rounded-[var(--dt-radius)] border-2 border-[var(--dt-line)] bg-[var(--dt-panel)] p-4 shadow-[3px_3px_0_var(--dt-line)] ${style}`}
             >
               <Icon size={20} className="flex-shrink-0 mt-0.5" />
               <p className="flex-1 text-sm font-medium">{toast.message}</p>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="flex-shrink-0 hover:opacity-70 transition-opacity"
-                aria-label="Close"
+                type="button"
+                className="flex-shrink-0 transition-opacity hover:opacity-60"
+                aria-label="Dismiss notification"
               >
                 <X size={18} />
               </button>

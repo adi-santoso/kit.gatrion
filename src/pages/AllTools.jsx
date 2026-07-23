@@ -1,66 +1,22 @@
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import * as Icons from 'lucide-react'
-import { tools } from '../data/tools'
-import { ToolBadge } from '../components/ui/Badge'
+import { useState } from 'react'
+import { Search } from 'lucide-react'
+import { tools, categories } from '../data/tools'
+import ToolCard from '../components/ui/ToolCard'
 
 export default function AllTools() {
-  return (
-    <motion.div
-      className="p-4 md:p-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="mb-4 md:mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">All Tools</h1>
-        <p className="text-sm md:text-base text-slate-600 dark:text-slate-400">
-          {tools.length} tools tersedia untuk membantu pekerjaan Anda
-        </p>
-      </div>
+  const [category, setCategory] = useState('all')
+  const [query, setQuery] = useState('')
+  const filteredTools = tools.filter((tool) => (category === 'all' || tool.category === category) && [tool.name, tool.description, ...tool.tags].join(' ').toLowerCase().includes(query.toLowerCase()))
 
-      <motion.div
-        className="grid grid-cols-2 md:grid-cols-4 gap-3"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: {
-              staggerChildren: 0.05
-            }
-          }
-        }}
-      >
-        {tools.map((tool) => {
-          const Icon = Icons[tool.icon]
-          return (
-            <motion.div
-              key={tool.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
-              }}
-            >
-              <Link to={tool.path}
-                className="group bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-xl p-4 hover:border-blue-500/30 dark:hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer block"
-              >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${tool.iconBg}`}>
-                  <motion.div whileHover={{ scale: 1.1, rotate: 5 }} transition={{ duration: 0.2 }}>
-                    <Icon size={20} className={tool.iconColor} />
-                  </motion.div>
-                </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="font-medium text-sm text-slate-900 dark:text-slate-100">{tool.name}</p>
-                  <ToolBadge tool={tool} />
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">{tool.description}</p>
-              </Link>
-            </motion.div>
-          )
-        })}
-      </motion.div>
-    </motion.div>
+  return (
+    <div className="dt-page">
+      <div className="mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+        <div><div className="dt-eyebrow mb-3">Full collection / {tools.length}</div><h1 className="dt-page-heading">Utility index</h1><p className="dt-page-copy mt-3">Every tool opens instantly and runs locally.</p></div>
+        <label className="flex h-11 w-full max-w-md items-center gap-2 rounded-[5px] border-[1.5px] border-[var(--dt-line)] bg-[var(--dt-panel)] px-3 shadow-[3px_3px_0_var(--dt-line)]"><Search size={16} className="text-[var(--dt-muted)]" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter by name or intent..." className="min-w-0 flex-1 bg-transparent text-xs outline-none" /></label>
+      </div>
+      <div className="mb-6 flex gap-2 overflow-x-auto pb-2"><button type="button" onClick={() => setCategory('all')} className={`dt-chip ${category === 'all' ? 'dt-chip-active' : ''}`}>All / {tools.length}</button>{categories.map((item) => <button type="button" key={item.id} onClick={() => setCategory(item.id)} className={`dt-chip ${category === item.id ? 'dt-chip-active' : ''}`}>{item.label}</button>)}</div>
+      <div className="mb-4 font-mono text-[10px] uppercase tracking-wider text-[var(--dt-muted)]">Showing {filteredTools.length} instruments</div>
+      <div className="dt-tool-grid">{filteredTools.map((tool) => <ToolCard key={tool.id} tool={tool} />)}</div>
+    </div>
   )
 }

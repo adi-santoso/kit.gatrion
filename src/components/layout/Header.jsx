@@ -2,50 +2,24 @@ import { Search, Sun, Moon, Menu } from 'lucide-react'
 import { useThemeStore } from '../../store/themeStore'
 import { useSearchStore } from '../../store/searchStore'
 import { useSidebarStore } from '../../store/sidebarStore'
+import { tools } from '../../data/tools'
 
 export default function Header() {
   const { theme, toggleTheme } = useThemeStore()
-  const { openSearch } = useSearchStore()
-  const { toggleSidebar } = useSidebarStore()
+  const openSearch = useSearchStore((state) => state.openSearch)
+  const toggleSidebar = useSidebarStore((state) => state.toggleSidebar)
 
   return (
-    <header className="sticky top-0 h-14 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-slate-200 dark:border-white/[0.06] z-10">
-      <div className="h-full flex items-center justify-between px-4 md:px-6">
-        {/* Menu Button (Mobile) */}
-        <button
-          onClick={toggleSidebar}
-          className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5"
-          aria-label="Toggle menu"
-        >
-          <Menu size={20} />
-        </button>
-
-        {/* Search Bar */}
-        <div className="flex-1 max-w-xl ml-2 lg:ml-0">
-          <button
-            onClick={openSearch}
-            className="w-full relative flex items-center"
-          >
-            <Search className="absolute left-3 text-slate-400" size={16} />
-            <div className="w-full bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-white/[0.06] rounded-lg pl-10 pr-16 py-2 text-sm text-slate-500 dark:text-slate-500 text-left hover:border-slate-300 dark:hover:border-white/20 transition-colors">
-              <span className="hidden sm:inline">Search tools...</span>
-              <span className="sm:hidden">Search...</span>
-            </div>
-            <kbd className="absolute right-3 px-2 py-0.5 bg-slate-200 dark:bg-gray-700 border border-slate-300 dark:border-white/[0.06] rounded text-xs text-slate-600 dark:text-slate-400 font-mono hidden sm:inline">
-              Ctrl K
-            </kbd>
-          </button>
-        </div>
-
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="ml-2 md:ml-4 p-2 rounded-lg bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-white/[0.06] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-300 hover:border-slate-300 dark:hover:border-white/20 transition-colors"
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
-      </div>
+    <header className="sticky top-0 z-30 flex h-[72px] items-center gap-3 border-b-2 border-[var(--dt-line)] bg-[color-mix(in_srgb,var(--dt-paper)_91%,transparent)] px-3 backdrop-blur-xl sm:px-5 lg:px-7">
+      <button type="button" onClick={toggleSidebar} className="grid h-10 w-10 shrink-0 place-items-center rounded-[5px] border-[1.5px] border-[var(--dt-line)] bg-[var(--dt-panel)] shadow-[2px_2px_0_var(--dt-line)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none lg:hidden" aria-label="Open navigation"><Menu size={19} /></button>
+      <span className="hidden text-sm font-extrabold sm:block lg:hidden">DT/</span>
+      <button type="button" onClick={openSearch} className="flex h-10 min-w-0 max-w-[680px] flex-1 items-center gap-2.5 rounded-[5px] border-[1.5px] border-[var(--dt-line)] bg-[var(--dt-panel)] px-3 text-left shadow-[3px_3px_0_var(--dt-line)] transition-transform hover:-translate-y-0.5">
+        <Search size={16} className="shrink-0 text-[var(--dt-muted)]" />
+        <span className="min-w-0 flex-1 truncate text-xs text-[var(--dt-muted)]">Find a tool, action, or format...</span>
+        <kbd className="hidden rounded-[3px] border border-[var(--dt-muted)] px-1.5 py-0.5 font-mono text-[9px] text-[var(--dt-muted)] sm:block">CTRL K</kbd>
+      </button>
+      <div className="ml-auto hidden items-center gap-2 whitespace-nowrap font-mono text-[10px] text-[var(--dt-muted)] md:flex"><span className="h-2 w-2 rounded-full border border-[var(--dt-line)] bg-green-500 shadow-[0_0_0_3px_rgb(34_197_94_/_0.18)]" />{tools.length} tools ready</div>
+      <button type="button" onClick={toggleTheme} className="grid h-10 w-10 shrink-0 place-items-center rounded-[5px] border-[1.5px] border-[var(--dt-line)] bg-[var(--dt-panel)] shadow-[2px_2px_0_var(--dt-line)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" aria-label="Toggle theme">{theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}</button>
     </header>
   )
 }

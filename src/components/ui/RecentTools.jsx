@@ -22,10 +22,10 @@ export default function RecentTools() {
   }
 
   return (
-    <div>
+    <section className="dt-recent-tools" aria-labelledby="recent-tools-title">
       <div className="flex items-center gap-2 mb-3">
-        <Clock size={16} className="text-slate-500 dark:text-slate-400" />
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        <Clock size={16} className="text-[var(--dt-coral)]" aria-hidden="true" />
+        <h3 id="recent-tools-title" className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--dt-muted)]">
           Recent Tools
         </h3>
       </div>
@@ -42,28 +42,29 @@ export default function RecentTools() {
             >
               <Link
                 to={tool.path}
-                className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group"
+                className="dt-recent-tool group flex items-center gap-3 rounded-[var(--dt-radius)] border border-transparent p-2 text-[var(--dt-ink)] transition-all hover:-translate-y-0.5 hover:border-[var(--dt-line)] hover:bg-[var(--dt-panel)] hover:shadow-[2px_2px_0_var(--dt-line)]"
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${tool.iconBg}`}>
-                  <Icon size={16} className={tool.iconColor} />
+                <div className="grid h-8 w-8 flex-shrink-0 place-items-center rounded-full bg-[var(--dt-ink)] text-[var(--dt-paper)]">
+                  <Icon size={16} aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-900 dark:text-slate-100 truncate">
+                  <p className="truncate text-sm font-bold">
                     {tool.name}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                  <p className="truncate font-mono text-[9px] uppercase tracking-wider text-[var(--dt-muted)]">
                     {tool.category}
                   </p>
                 </div>
                 <ArrowRight 
                   size={14} 
-                  className="text-slate-400 dark:text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" 
+                  className="text-[var(--dt-coral)] opacity-0 transition-opacity group-hover:opacity-100"
+                  aria-hidden="true"
                 />
               </Link>
             </motion.div>
           )
         })}
       </div>
-    </div>
+    </section>
   )
 }

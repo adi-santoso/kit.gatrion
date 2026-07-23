@@ -117,16 +117,16 @@ function App() {
 
   return (
     <Router>
-      <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+      <div className="dt-app-shell">
         <Sidebar />
         <motion.div
-          className="flex-1 lg:ml-64 flex flex-col overflow-hidden"
+          className="dt-app-main flex flex-col"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
           <Header />
-          <main className="flex-1 overflow-y-auto">
+          <main className="flex-1">
             <AnimatedRoutes />
           </main>
         </motion.div>

@@ -52,10 +52,11 @@ export default function ToolPage() {
 
   if (!tool) {
     return (
-      <div className="p-6">
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-slate-100 mb-2">Tool Not Found</h2>
-          <p className="text-slate-400">The tool you're looking for doesn't exist.</p>
+      <div className="dt-page">
+        <div className="dt-panel dt-hard-shadow py-16 text-center">
+          <div className="dt-eyebrow mb-4 justify-center">Error / 404</div>
+          <h2 className="dt-page-heading mb-3">Tool not found</h2>
+          <p className="dt-page-copy">The instrument you requested does not exist.</p>
         </div>
       </div>
     )
@@ -72,11 +73,12 @@ export default function ToolPage() {
 
   if (!ToolComponent) {
     return (
-      <div className="p-6">
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold text-slate-100 mb-2">{tool.name}</h2>
-          <p className="text-slate-400">{tool.description}</p>
-          <p className="text-sm text-slate-500 mt-4">Tool implementation coming soon...</p>
+      <div className="dt-page">
+        <div className="dt-panel dt-hard-shadow py-16 text-center">
+          <div className="dt-eyebrow mb-4 justify-center">Instrument / pending</div>
+          <h2 className="dt-page-heading mb-3">{tool.name}</h2>
+          <p className="dt-page-copy">{tool.description}</p>
+          <p className="mt-4 font-mono text-[10px] uppercase text-[var(--dt-coral)]">Implementation coming soon</p>
         </div>
       </div>
     )
@@ -92,8 +94,10 @@ export default function ToolPage() {
       <ToolSchema tool={tool} />
       <BreadcrumbSchema items={breadcrumbItems} />
       <Suspense fallback={
-        <div className="p-6 flex items-center justify-center h-64">
-          <div className="text-slate-400">Loading...</div>
+        <div className="dt-page flex h-64 items-center justify-center">
+          <div className="dt-panel flex items-center gap-3 px-5 py-4 font-mono text-[10px] uppercase tracking-wider shadow-[3px_3px_0_var(--dt-line)]">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[var(--dt-acid)] ring-1 ring-[var(--dt-line)]" />Loading instrument
+          </div>
         </div>
       }>
         <motion.div

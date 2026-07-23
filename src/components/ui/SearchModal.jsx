@@ -33,29 +33,43 @@ export default function SearchModal() {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-20">
-      <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/[0.06] rounded-xl w-full max-w-2xl mx-4 shadow-2xl">
+    <div
+      className="dt-overlay fixed inset-0 z-50 flex items-start justify-center bg-black/60 px-4 pt-20 backdrop-blur-sm"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) closeSearch()
+      }}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="search-dialog-title"
+        className="dt-dialog w-full max-w-2xl overflow-hidden rounded-[var(--dt-radius)] border-2 border-[var(--dt-line)] bg-[var(--dt-panel)] text-[var(--dt-ink)] shadow-[var(--dt-shadow)]"
+      >
+        <h2 id="search-dialog-title" className="sr-only">Search tools</h2>
         {/* Search Input */}
-        <div className="flex items-center gap-3 p-4 border-b border-slate-200 dark:border-white/[0.06]">
-          <Search size={20} className="text-slate-400" />
+        <div className="dt-dialog-header flex items-center gap-3 border-b-2 border-[var(--dt-line)] p-4">
+          <Search size={20} className="text-[var(--dt-muted)]" aria-hidden="true" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search tools..."
+            aria-label="Search tools"
             autoFocus
-            className="flex-1 bg-transparent text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none"
+            className="dt-search-input min-w-0 flex-1 bg-transparent text-sm text-[var(--dt-ink)] placeholder:text-[var(--dt-muted)] focus:outline-none"
           />
           <button
+            type="button"
             onClick={closeSearch}
-            className="p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+            aria-label="Close search"
+            className="dt-icon-button grid h-9 w-9 place-items-center rounded-[var(--dt-radius)] border border-[var(--dt-line)] bg-[var(--dt-panel)] text-[var(--dt-ink)] transition-transform hover:-translate-y-0.5"
           >
-            <X size={18} />
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
         {/* Results */}
-        <div className="max-h-96 overflow-y-auto p-2">
+        <div className="dt-search-results max-h-96 overflow-y-auto p-2" aria-live="polite">
           {results.length === 0 && query && (
             <EmptyState
               icon="SearchX"
@@ -68,16 +82,17 @@ export default function SearchModal() {
             const Icon = Icons[tool.icon]
             return (
               <button
+                type="button"
                 key={tool.id}
                 onClick={() => handleSelect(tool)}
-                className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-left"
+                className="dt-search-result flex w-full items-center gap-3 rounded-[var(--dt-radius)] border border-transparent p-3 text-left transition-all hover:-translate-y-0.5 hover:border-[var(--dt-line)] hover:bg-[var(--dt-acid)] hover:text-[#161816]"
               >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${tool.iconBg}`}>
-                  <Icon size={18} className={tool.iconColor} />
+                <div className="dt-tool-glyph grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[var(--dt-ink)] text-[var(--dt-paper)]">
+                  <Icon size={18} aria-hidden="true" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{tool.name}</p>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">{tool.description}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-bold">{tool.name}</p>
+                  <p className="truncate text-xs opacity-65">{tool.description}</p>
                 </div>
               </button>
             )
@@ -85,9 +100,9 @@ export default function SearchModal() {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-4 py-3 border-t border-slate-200 dark:border-white/[0.06] text-xs text-slate-500">
+        <div className="dt-dialog-footer flex items-center justify-between border-t-2 border-[var(--dt-line)] px-4 py-3 font-mono text-[10px] uppercase tracking-wider text-[var(--dt-muted)]">
           <span>Type to search</span>
-          <span>ESC to close</span>
+          <span><kbd>Esc</kbd> to close</span>
         </div>
       </div>
     </div>

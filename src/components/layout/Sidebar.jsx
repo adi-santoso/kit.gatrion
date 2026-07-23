@@ -1,173 +1,75 @@
+import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X, ImageIcon, Gamepad2, FolderOpen, Film, Package, Grid3x3 } from 'lucide-react'
-import { categories } from '../../data/tools'
+import { Home, Braces, Type, Lock, Palette, Code2, Wrench, Star, Info, X, ImageIcon, Gamepad2 } from 'lucide-react'
+import { categories, tools } from '../../data/tools'
 import { useSidebarStore } from '../../store/sidebarStore'
+import { useFavoritesStore } from '../../store/favoritesStore'
+import { useRecentStore } from '../../store/recentStore'
 
-const categoryColors = {
-  json: { icon: 'text-blue-500', bg: 'bg-blue-500/10' },
-  text: { icon: 'text-green-500', bg: 'bg-green-500/10' },
-  crypto: { icon: 'text-violet-500', bg: 'bg-violet-500/10' },
-  css: { icon: 'text-pink-500', bg: 'bg-pink-500/10' },
-  formatter: { icon: 'text-orange-500', bg: 'bg-orange-500/10' },
-  misc: { icon: 'text-slate-500', bg: 'bg-slate-500/10' },
-  image: { icon: 'text-indigo-500', bg: 'bg-indigo-500/10' },
-  gamedev: { icon: 'text-purple-500', bg: 'bg-purple-500/10' },
-}
-
+const icons = { Braces, Type, Lock, Palette, Code2, ImageIcon, Gamepad2, Wrench }
 
 export default function Sidebar() {
   const location = useLocation()
   const { isOpen, closeSidebar } = useSidebarStore()
+  const favoriteCount = useFavoritesStore((state) => state.favorites.length)
+  const recentCount = useRecentStore((state) => state.recents.length)
 
-  const isActive = (path) => location.pathname === path
+  useEffect(() => {
+    if (!isOpen || window.innerWidth >= 1024) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = previousOverflow }
+  }, [isOpen])
 
-  // Close sidebar on navigation (mobile only)
   const handleLinkClick = () => {
-    if (window.innerWidth < 1024) { // lg breakpoint
-      closeSidebar()
-    }
+    if (window.innerWidth < 1024) closeSidebar()
   }
+
+  const navClass = (active) => `group flex items-center gap-2.5 rounded-[3px] px-2.5 py-2 text-xs transition-[background-color,color,transform] hover:translate-x-0.5 ${
+    active ? 'bg-[var(--dt-acid)] font-extrabold text-[#161816]' : 'text-[#f4f1e8]/70 hover:bg-white/10 hover:text-[#f4f1e8]'
+  }`
 
   return (
     <>
-      {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={closeSidebar}
-        />
-      )}
-
-      {/* Sidebar */}
-      <motion.aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-slate-200 dark:border-white/[0.06] flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-      {/* Logo */}
-      <div className="h-14 flex items-center justify-between px-4 border-b border-slate-200 dark:border-white/[0.06]">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-500 rounded-lg flex items-center justify-center text-white font-mono text-sm shadow-sm">
-            &lt;/&gt;
-          </div>
-          <span className="font-bold text-slate-900 dark:text-slate-100 tracking-tight">DevToolkit</span>
-        </div>
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            e.preventDefault()
-            closeSidebar()
-          }}
-          onTouchEnd={(e) => {
-            e.stopPropagation()
-            e.preventDefault()
-            closeSidebar()
-          }}
-          className="lg:hidden p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 relative z-10"
-          style={{ touchAction: 'none', pointerEvents: 'auto' }}
-        >
-          <X size={20} />
-        </button>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4">
-        {/* Dashboard */}
-        <Link
-          to="/"
-          onClick={handleLinkClick}
-          className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-lg transition-colors ${
-            isActive('/')
-              ? 'bg-blue-500/10 border-l-2 border-blue-500 text-blue-500 dark:text-blue-400'
-              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300'
-          }`}
-        >
-          <Home size={16} />
-          <span className="text-sm font-medium">Dashboard</span>
-        </Link>
-
-        {/* Categories */}
-        <div className="mt-6 px-4">
-          <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
-            Kategori
-          </p>
-        </div>
-
-        {categories.map((cat) => {
-          const Icon = {
-            Braces,
-            Type,
-            Lock,
-            Palette,
-            Code2,
-            ImageIcon,
-            Gamepad2,
-            FolderOpen,
-            Film,
-            Package,
-            Grid3x3,
-            Wrench,
-          }[cat.icon]
-
-          return (
-            <Link
-              key={cat.id}
-              to={`/${cat.id}`}
-              onClick={handleLinkClick}
-              className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-lg transition-colors ${
-                location.pathname.startsWith(`/${cat.id}`)
-                  ? 'bg-blue-500/10 border-l-2 border-blue-500 text-blue-500 dark:text-blue-400'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300'
-              }`}
-            >
-              <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${categoryColors[cat.id]?.bg || 'bg-slate-100'}`}>
-                <Icon size={14} className={categoryColors[cat.id]?.icon || 'text-slate-500'} />
-              </div>
-              <span className="text-sm font-medium">{cat.label}</span>
-            </Link>
-          )
-        })}
-
-        {/* Favorites & About */}
-        <div className="mt-6 border-t border-slate-200 dark:border-white/[0.06] pt-4">
-          <Link
-            to="/favorites"
-            onClick={handleLinkClick}
-            className="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
-          >
-            <Star size={16} />
-            <span className="text-sm font-medium">Favorites</span>
+      <button
+        type="button"
+        aria-label="Close navigation"
+        onClick={closeSidebar}
+        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-[2px] transition-opacity lg:hidden ${isOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}
+      />
+      <aside className={`fixed inset-y-0 left-0 z-50 flex w-56 flex-col border-r-2 border-[#232621] bg-[#161816] text-[#f4f1e8] transition-transform duration-200 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-[105%]'}`}>
+        <div className="flex h-[72px] items-center gap-3 border-b border-white/20 px-[18px]">
+          <Link to="/" onClick={handleLinkClick} className="flex min-w-0 items-center gap-3">
+            <div className="grid h-9 w-9 shrink-0 -rotate-6 place-items-center rounded-full bg-[var(--dt-acid)] font-mono text-xs font-medium text-[#161816]">&lt;/&gt;</div>
+            <div className="min-w-0"><strong className="block text-sm tracking-[-0.03em]">DevToolkit</strong><small className="block truncate font-mono text-[8px] tracking-[0.08em] opacity-50">LOCAL UTILITY SYSTEM</small></div>
           </Link>
-          <Link
-            to="/about"
-            onClick={handleLinkClick}
-            className="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-300 transition-colors"
-          >
-            <Info size={16} />
-            <span className="text-sm font-medium">About</span>
-          </Link>
+          <button type="button" onClick={closeSidebar} className="ml-auto grid h-8 w-8 place-items-center rounded-[3px] hover:bg-white/10 lg:hidden" aria-label="Close menu"><X size={18} /></button>
         </div>
-      </nav>
 
-      {/* App Info Card */}
-      <div className="p-3 border-t border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02]">
-        <div className="text-xs text-center space-y-2">
-          <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400">
-            <span className="font-semibold">DevToolkit</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">v0.4.0</span>
+        <nav className="flex-1 overflow-y-auto px-3 py-5">
+          <p className="mb-2 px-2 font-mono text-[9px] uppercase tracking-[0.14em] text-white/40">Workspace</p>
+          <div className="space-y-0.5">
+            <Link to="/" onClick={handleLinkClick} className={navClass(location.pathname === '/')}><Home size={16} /><span>Overview</span><span className="ml-auto font-mono text-[9px] opacity-55">{tools.length}</span></Link>
+            <Link to="/favorites" onClick={handleLinkClick} className={navClass(location.pathname === '/favorites')}><Star size={16} /><span>Favorites</span><span className="ml-auto font-mono text-[9px] opacity-55">{favoriteCount}</span></Link>
+            <Link to="/#recent" onClick={handleLinkClick} className={navClass(false)}><span className="w-4 text-center font-mono">↺</span><span>Recent</span><span className="ml-auto font-mono text-[9px] opacity-55">{recentCount}</span></Link>
           </div>
-          <p className="text-slate-600 dark:text-slate-400">
-            🛡️ 100% Private • No data sent
-          </p>
-          <a
-            href="https://gatrion.my.id"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors font-medium"
-          >
-            Built by gatrion →
-          </a>
-        </div>
-      </div>
-    </motion.aside>
+
+          <p className="mb-2 mt-6 px-2 font-mono text-[9px] uppercase tracking-[0.14em] text-white/40">Collections</p>
+          <div className="space-y-0.5">
+            {categories.map((category) => {
+              const Icon = icons[category.icon] || Wrench
+              const count = tools.filter((tool) => tool.category === category.id).length
+              return <Link key={category.id} to={`/${category.id}`} onClick={handleLinkClick} className={navClass(location.pathname.startsWith(`/${category.id}`))}><Icon size={16} /><span>{category.label}</span><span className="ml-auto font-mono text-[9px] opacity-55">{String(count).padStart(2, '0')}</span></Link>
+            })}
+          </div>
+
+          <div className="mt-6 border-t border-white/15 pt-4">
+            <Link to="/about" onClick={handleLinkClick} className={navClass(location.pathname === '/about')}><Info size={16} /><span>About</span></Link>
+          </div>
+        </nav>
+
+        <div className="p-3.5"><div className="rounded-[3px] bg-[var(--dt-cyan)] p-3 text-[10px] leading-relaxed text-[#161816]"><b className="mb-1 block text-[11px]">● PRIVATE BY DEFAULT</b>Files stay inside this browser. No uploads. No tracking.</div></div>
+      </aside>
     </>
   )
 }

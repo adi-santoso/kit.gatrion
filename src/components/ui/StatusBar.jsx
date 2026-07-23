@@ -2,22 +2,26 @@ import { CheckCircle, XCircle } from 'lucide-react'
 
 export default function StatusBar({ isValid, message, bytes }) {
   return (
-    <div className="flex items-center justify-between px-4 py-2 bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-white/[0.06] rounded-lg text-sm">
-      <div className="flex items-center gap-2">
+    <div
+      className="dt-status-bar flex flex-wrap items-center justify-between gap-2 rounded-[5px] border-[1.5px] border-[var(--dt-line)] bg-[var(--dt-paper)] px-4 py-2.5 text-xs text-[var(--dt-ink)]"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="flex min-w-0 items-center gap-2">
         {isValid ? (
           <>
-            <CheckCircle size={16} className="text-green-500 dark:text-green-400" />
-            <span className="text-green-600 dark:text-green-400">Valid JSON</span>
+            <CheckCircle size={16} className="shrink-0 text-[var(--dt-acid)]" />
+            <span className="font-bold">Valid JSON</span>
           </>
         ) : (
           <>
-            <XCircle size={16} className="text-red-500 dark:text-red-400" />
-            <span className="text-red-600 dark:text-red-400">{message || 'Invalid JSON'}</span>
+            <XCircle size={16} className="shrink-0 text-[var(--dt-coral)]" />
+            <span className="break-words font-bold text-[var(--dt-coral)]">{message || 'Invalid JSON'}</span>
           </>
         )}
       </div>
       {bytes !== undefined && (
-        <span className="text-slate-600 dark:text-slate-400">{bytes} bytes</span>
+        <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--dt-muted)]">{bytes} bytes</span>
       )}
     </div>
   )
